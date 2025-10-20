@@ -3,18 +3,40 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Search, HouseDoorFill, PeopleFill, BriefcaseFill, ChatDotsFill, BellFill, CaretDownFill, Grid3x3GapFill } from "react-bootstrap-icons";
+import { Search } from "react-bootstrap-icons";
 import { NavLink } from "react-router";
 import { useState } from "react";
 import MyDropDown from "./MyDropDown";
 import DropdownAziende from "./DropdownAziende";
+import AllLinkNavbar from "./AllLinkNavbar";
+import ButtonDropdownTu from "./ButtonDropdownTu";
+import ButtonDropDownAziende from "./ButtonDropDownAziende";
 
 const MyNavBar = () => {
   const [hasDrop, setHasDrop] = useState(false);
   const [hasDropAziende, sethasDropAziende] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const visibleButtonTu = () => {
+    setHasDrop(!hasDrop);
+    sethasDropAziende(false);
+    setIsExpanded(false);
+  };
+  const visibleModalAziende = () => {
+    sethasDropAziende(!hasDropAziende);
+    setHasDrop(false);
+    setIsExpanded(false);
+  };
+
+  const handleToggle = () => {
+    setIsExpanded(!isExpanded);
+    setHasDrop(false);
+    sethasDropAziende(false);
+  };
+  const handleClose = () => setIsExpanded(false);
 
   return (
-    <Navbar expand="lg" className="bg-white p-0">
+    <Navbar expand="lg" className="bg-white p-0" expanded={isExpanded}>
       <Container>
         <Navbar.Brand href="#">
           <img
@@ -37,79 +59,16 @@ const MyNavBar = () => {
             />
           </div>
         </Form>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle onClick={handleToggle} aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav className="me-auto my-2 my-lg-0 d-flex align-items-center" style={{ maxHeight: "100px" }}>
-            <NavLink to="/" className={({ isActive }) => `nav-link fw-bold p-0 px-md-1 px-xl-4 ${isActive ? "notActive" : "isActive"}`}>
-              <div className="d-flex justify-content-center align-items-center flex-column">
-                <HouseDoorFill className="fs-5" />
-                <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
-                  Home
-                </p>
-              </div>
-            </NavLink>
-            <NavLink to="#" className={({ isActive }) => `nav-link fw-bold p-0 px-md-1 px-xl-4 ${isActive ? "notActive" : "isActive"}`}>
-              <div className="d-flex justify-content-center align-items-center flex-column">
-                <PeopleFill className="fs-5" />
-                <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
-                  Rete
-                </p>
-              </div>
-            </NavLink>
-            <NavLink to="#" className={({ isActive }) => `nav-link fw-bold p-0 px-md-1 px-xl-4 ${isActive ? "notActive" : "isActive"}`}>
-              <div className="d-flex justify-content-center align-items-center flex-column">
-                <BriefcaseFill className="fs-5" />
-                <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
-                  Lavoro
-                </p>
-              </div>
-            </NavLink>
-            <NavLink to="#" className={({ isActive }) => `nav-link fw-bold p-0 px-md-1 px-xl-4 ${isActive ? "notActive" : "isActive"}`}>
-              <div className="d-flex justify-content-center align-items-center flex-column">
-                <ChatDotsFill className="fs-5" />
-                <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
-                  Messaggistica
-                </p>
-              </div>
-            </NavLink>
-            <NavLink to="#" className={({ isActive }) => `nav-link fw-bold p-0 px-md-1 px-xl-4 ${isActive ? "notActive" : "isActive"}`}>
-              <div className="d-flex justify-content-center align-items-center flex-column">
-                <BellFill className="fs-5" />
-                <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
-                  Notifiche
-                </p>
-              </div>
-            </NavLink>
-            <div
-              style={{ cursor: "pointer", position: "relative" }}
-              className="d-flex justify-content-center align-items-center flex-column  p-0 ms-4"
-              onClick={() => setHasDrop(!hasDrop)}
-            >
-              <img
-                src="https://static.vecteezy.com/system/resources/previews/051/270/245/non_2x/cartoon-people-avatar-minimalist-human-avatar-versatile-icon-for-online-projects-an-avatar-for-the-profile-picture-of-someone-vector.jpg"
-                alt="immagine profilo"
-                style={{ width: "35px", borderRadius: "50%" }}
-              />
-              <p style={{ fontSize: "11px", color: "grey" }} className="d-none d-xl-block m-0">
-                Tu
-                <CaretDownFill />
-              </p>
-            </div>
+          <Nav className="d-flex flex-row flex-nowrap align-items-center justify-content-center overflow-auto gap-2" style={{ maxHeight: "100px" }}>
+            <AllLinkNavbar />
+            <ButtonDropdownTu visibleButtonTu={visibleButtonTu} />
             <div style={{ height: "50px", borderLeft: "1px solid #ebe4e4" }} className="ms-5"></div>
-            <div
-              style={{ cursor: "pointer" }}
-              className="d-flex justify-content-center align-items-center flex-column notActive mx-3"
-              onClick={() => sethasDropAziende(!hasDropAziende)}
-            >
-              <Grid3x3GapFill className="fs-5" />
-              <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
-                Per le aziende
-                <CaretDownFill />
-              </p>
-            </div>
-            <NavLink to="#" className={`nav-link text-warning text-center text-decoration-underline p-0 px-md-1 px-xl-4`}>
+            <ButtonDropDownAziende visibleModalAziende={visibleModalAziende} />
+            <NavLink onClick={handleClose} to="#" className={`nav-link text-warning text-center text-decoration-underline p-0 px-md-1 px-xl-4`}>
               <div className="d-flex justify-content-center align-items-center flex-column">
-                <p style={{ fontSize: "11px" }} className="m-0">
+                <p style={{ fontSize: "11px", inlineSize: "max-content" }} className="m-0">
                   Prova Premium per 0<br />
                   EUR
                 </p>

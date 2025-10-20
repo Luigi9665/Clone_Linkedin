@@ -53,3 +53,7 @@ body {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.navbar-collapse {
+  transition: all 0.3s ease !important;
+}
