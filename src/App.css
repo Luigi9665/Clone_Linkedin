@@ -35,3 +35,45 @@ body {
 .dropdown-menu {
   left: -100px !important ;
 }
+/* inizio  col salvatore */
+.profile {
+  margin-top: -112px;
+  z-index: 4;
+}
+.verifica {
+  border-style: dashed;
+  height: 24px;
+  width: 236px;
+  box-shadow: none;
+  border-width: 1px;
+  color: #004182;
+  border-color: #004182;
+}
+.button-trasparenteNero {
+  border: 2px solid black;
+  background-color: transparent;
+  color: black;
+  padding: 5px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-trasparenteNero:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.button-trasparenteBlu {
+  border: 2px solid #004182;
+  background-color: transparent;
+  color: #004182;
+  padding: 5px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-trasparenteBlu:hover {
+  background-color: rgba(69, 98, 192, 0.1);
+}
