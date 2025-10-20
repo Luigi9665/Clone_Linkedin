@@ -3,13 +3,15 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Search, HouseDoorFill, PeopleFill, BriefcaseFill, ChatDotsFill, BellFill, CaretDownFill } from "react-bootstrap-icons";
+import { Search, HouseDoorFill, PeopleFill, BriefcaseFill, ChatDotsFill, BellFill, CaretDownFill, Grid3x3GapFill } from "react-bootstrap-icons";
 import { NavLink } from "react-router";
 import { useState } from "react";
 import MyDropDown from "./MyDropDown";
+import DropdownAziende from "./DropdownAziende";
 
 const MyNavBar = () => {
   const [hasDrop, setHasDrop] = useState(false);
+  const [hasDropAziende, sethasDropAziende] = useState(false);
 
   return (
     <Navbar expand="lg" className="bg-white p-0">
@@ -79,8 +81,8 @@ const MyNavBar = () => {
               </div>
             </NavLink>
             <div
-              style={{ cursor: "pointer" }}
-              className="d-flex justify-content-center align-items-center flex-column p-0 ms-4"
+              style={{ cursor: "pointer", position: "relative" }}
+              className="d-flex justify-content-center align-items-center flex-column  p-0 ms-4"
               onClick={() => setHasDrop(!hasDrop)}
             >
               <img
@@ -92,10 +94,31 @@ const MyNavBar = () => {
                 Tu
                 <CaretDownFill />
               </p>
-              {hasDrop && <MyDropDown hasDrop={hasDrop} />}
             </div>
+            <div style={{ height: "50px", borderLeft: "1px solid #ebe4e4" }} className="ms-5"></div>
+            <div
+              style={{ cursor: "pointer" }}
+              className="d-flex justify-content-center align-items-center flex-column notActive mx-3"
+              onClick={() => sethasDropAziende(!hasDropAziende)}
+            >
+              <Grid3x3GapFill className="fs-5" />
+              <p style={{ fontSize: "11px" }} className="d-none d-xl-block m-0">
+                Per le aziende
+                <CaretDownFill />
+              </p>
+            </div>
+            <NavLink to="#" className={`nav-link text-warning text-center text-decoration-underline p-0 px-md-1 px-xl-4`}>
+              <div className="d-flex justify-content-center align-items-center flex-column">
+                <p style={{ fontSize: "11px" }} className="m-0">
+                  Prova Premium per 0<br />
+                  EUR
+                </p>
+              </div>
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
+        {hasDrop && <MyDropDown hasDrop={hasDrop} />}
+        {hasDropAziende && <DropdownAziende hasDropAziende={hasDropAziende} />}
       </Container>
     </Navbar>
   );

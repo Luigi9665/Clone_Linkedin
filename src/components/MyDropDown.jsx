@@ -1,8 +1,9 @@
 import { Button, NavDropdown } from "react-bootstrap";
 
-const MyDropDown = ({ hasDrop }) => {
+const MyDropDown = () => {
   return (
-    <NavDropdown id="navbarScrollingDropdown" className="nav-linkMod " show={hasDrop}>
+    // <NavDropdown id="navbarScrollingDropdown" className="nav-linkMod" show={hasDrop}>
+    <div className="nav-linkMod positionTuButton py-2">
       <div className="d-flex align-items-center">
         <img
           src="https://static.vecteezy.com/system/resources/previews/051/270/245/non_2x/cartoon-people-avatar-minimalist-human-avatar-versatile-icon-for-online-projects-an-avatar-for-the-profile-picture-of-someone-vector.jpg"
@@ -20,13 +21,15 @@ const MyDropDown = ({ hasDrop }) => {
       </div>
       <div className="d-flex gap-2 px-2 mt-1">
         <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="outline-primary">
-          Visualizza Profilo
+          Visualizza
+          <br />
+          Profilo
         </Button>
         <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="primary">
           Verifica
         </Button>
       </div>
-      <NavDropdown.Divider />
+      <div style={{ borderBottom: "1px solid #ebe4e4", marginBlock: "5px" }}></div>
       <div className="d-flex flex-column justify-content-start px-3">
         <h5>Account</h5>
         <div>
@@ -45,7 +48,7 @@ const MyDropDown = ({ hasDrop }) => {
           Lingua
         </a>
       </div>
-      <NavDropdown.Divider />
+      <div style={{ borderBottom: "1px solid #ebe4e4", marginBlock: "5px" }}></div>
       <div className="d-flex flex-column justify-content-start px-3">
         <h5>Gestisci</h5>
 
@@ -57,13 +60,14 @@ const MyDropDown = ({ hasDrop }) => {
           Account per la pubblicazione di of...
         </a>
       </div>
-      <NavDropdown.Divider />
+      <div style={{ borderBottom: "1px solid #ebe4e4", marginBlock: "5px" }}></div>
       <div className="px-3">
         <a href="#" className="text-muted fs-6 linkDropo">
           Esci
         </a>
       </div>
-    </NavDropdown>
+    </div>
+    // </NavDropdown>
   );
 };
 
