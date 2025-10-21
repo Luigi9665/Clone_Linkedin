@@ -38,6 +38,17 @@ body {
   font-size: 13px !important;
 }
 
+.dropLogin {
+  background-color: white;
+  position: absolute;
+  top: 60px;
+  left: 49%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .dropdown-toggle::after {
   display: none;
 }

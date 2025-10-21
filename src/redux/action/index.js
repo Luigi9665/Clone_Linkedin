@@ -1,0 +1,38 @@
+export const ADD_PROFILE = "ADD_PROFILE";
+export const LOG_IN = "LOG_IN";
+
+// IMPORT DELLA CHIAVE PER LE FETCH
+const key = import.meta.env.VITE_TOKEN_API;
+
+// FUNIONI PER RICHIAMARE LE AZIONI DEI REDUCERS
+export const loginAction = (user) => ({ type: LOG_IN, payload: user });
+
+// FETCH PER IL PROFILO SELEZIONATO
+export const addProfileAction = (indiceRicerca) => {
+  const url = `https://striveschool-api.herokuapp.com/api/profile/${indiceRicerca}`;
+  return async (dispatch, getState) => {
+    console.log(getState);
+    try {
+      let response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        const dataObj = await response.json();
+        dispatch({ type: ADD_PROFILE, payload: dataObj });
+      } else if (response.status === 401 || response.status === 403) {
+        throw new Error("Autorizzazione fallita, controlla la tua API key.");
+      } else if (response.status === 404) {
+        throw new Error("Risorsa non trovata (404). Riprova con la ricerca.");
+      } else if (response.status >= 500) {
+        throw new Error("Errore del server, riprova più tardi.");
+      } else {
+        throw new Error("Errore nella richiesta: " + response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

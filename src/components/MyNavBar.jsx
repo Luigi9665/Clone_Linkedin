@@ -11,29 +11,45 @@ import DropdownAziende from "./DropdownAziende";
 import AllLinkNavbar from "./AllLinkNavbar";
 import ButtonDropdownTu from "./ButtonDropdownTu";
 import ButtonDropDownAziende from "./ButtonDropDownAziende";
+import { useSelector } from "react-redux";
+import DropLogIn from "./dropLogIn";
 
 const MyNavBar = () => {
   const [hasDrop, setHasDrop] = useState(false);
   const [hasDropAziende, sethasDropAziende] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isLogin, setLogin] = useState(false);
 
   const visibleButtonTu = () => {
     setHasDrop(!hasDrop);
     sethasDropAziende(false);
     setIsExpanded(false);
+    setLogin(false);
   };
   const visibleModalAziende = () => {
     sethasDropAziende(!hasDropAziende);
     setHasDrop(false);
     setIsExpanded(false);
+    setLogin(false);
   };
 
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
     setHasDrop(false);
     sethasDropAziende(false);
+    setLogin(false);
   };
+
+  const handleLogin = () => {
+    setLogin(!isLogin);
+    setHasDrop(false);
+    sethasDropAziende(false);
+    setIsExpanded(false);
+  };
+
   const handleClose = () => setIsExpanded(false);
+
+  const hasUser = useSelector((state) => state.user.user);
 
   return (
     <Navbar expand="lg" className="bg-white p-0" expanded={isExpanded}>
@@ -63,7 +79,15 @@ const MyNavBar = () => {
         <Navbar.Collapse id="navbarScroll">
           <Nav className="d-flex flex-row flex-nowrap align-items-center justify-content-center overflow-auto gap-2 ms-lg-5" style={{ maxHeight: "100px" }}>
             <AllLinkNavbar />
-            <ButtonDropdownTu visibleButtonTu={visibleButtonTu} />
+
+            {hasUser ? (
+              <ButtonDropdownTu visibleButtonTu={visibleButtonTu} />
+            ) : (
+              <Button variant="outline-primary" onClick={() => handleLogin()}>
+                Log in
+              </Button>
+            )}
+
             <div style={{ height: "50px", borderLeft: "1px solid #ebe4e4" }} className="ms-5"></div>
             <ButtonDropDownAziende visibleModalAziende={visibleModalAziende} />
             <NavLink onClick={handleClose} to="#" className={`nav-link text-warning text-center text-decoration-underline p-0 px-md-1 px-xl-4`}>
@@ -76,8 +100,9 @@ const MyNavBar = () => {
             </NavLink>
           </Nav>
         </Navbar.Collapse>
-        {hasDrop && <MyDropDown hasDrop={hasDrop} />}
+        {hasDrop && <MyDropDown visibleButtonTu={visibleButtonTu} />}
         {hasDropAziende && <DropdownAziende hasDropAziende={hasDropAziende} />}
+        {isLogin && <DropLogIn handleLogin={handleLogin} />}
       </Container>
     </Navbar>
   );

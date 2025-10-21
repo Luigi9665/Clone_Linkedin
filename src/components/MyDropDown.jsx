@@ -1,22 +1,36 @@
 import { Button, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../redux/action";
 
-const MyDropDown = () => {
+const MyDropDown = ({ visibleButtonTu }) => {
+  // IMPORTARSI IL DISPATCH E L'AZIONE PER LA FETCH IN CASO DI ERRORE NEL LOG IN
+
+  const profileState = useSelector((state) => state.profileSelect.content);
+
+  const dispatch = useDispatch();
+
+  const setDrop = () => {
+    dispatch(loginAction(""));
+    visibleButtonTu();
+  };
+
   return (
     // <NavDropdown id="navbarScrollingDropdown" className="nav-linkMod" show={hasDrop}>
     <div className="nav-linkMod positionTuButton py-2">
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center px-2 mb-3">
         <img
-          src="https://static.vecteezy.com/system/resources/previews/051/270/245/non_2x/cartoon-people-avatar-minimalist-human-avatar-versatile-icon-for-online-projects-an-avatar-for-the-profile-picture-of-someone-vector.jpg"
+          // src="https://static.vecteezy.com/system/resources/previews/051/270/245/non_2x/cartoon-people-avatar-minimalist-human-avatar-versatile-icon-for-online-projects-an-avatar-for-the-profile-picture-of-someone-vector.jpg"
+          src={profileState.image}
           alt="immagine profilo"
-          style={{ width: "55px", borderRadius: "50%" }}
+          style={{ width: "40px", borderRadius: "50%" }}
         />
         <div style={{ paddingInline: "10px" }}>
           <p style={{ inlineSize: "max-content", fontSize: "14px", fontWeight: "500" }} className="m-0">
-            Luigi Ventriglia
+            {`${profileState.name} ${profileState.surname}`}
           </p>
           <p style={{ inlineSize: "max-content", fontSize: "14px" }} className="m-0">
-            Web Developer
+            {profileState.title}
           </p>
         </div>
       </div>
@@ -65,7 +79,7 @@ const MyDropDown = () => {
       </div>
       <div style={{ borderBottom: "1px solid #ebe4e4", marginBlock: "5px" }}></div>
       <div className="px-3">
-        <a href="#" className="text-muted fs-6 linkDropo">
+        <a href="#" className="text-muted fs-6 linkDropo" onClick={setDrop}>
           Esci
         </a>
       </div>
