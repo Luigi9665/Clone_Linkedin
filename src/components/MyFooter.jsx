@@ -10,7 +10,7 @@ const MyFooter = () => {
   };
 
   return (
-    <Container>
+    <Container className="mt-4 mb-3">
       <Row xs={1} sm={2} md={3} lg={5}>
         <Col>
           <div className="d-flex flex-column justift-content-start align-items-start fw-semibold gap-3">

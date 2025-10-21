@@ -9,7 +9,6 @@ function App() {
   return (
     <BrowserRouter>
       <MyNavBar />
-
       <Routes>
         <Route path="/" element={<MyHome />} />
         <Route path="/profile/:id" element={<Profile />} />

@@ -1,24 +1,15 @@
-import { Button, Col, Container, Dropdown, Row } from "react-bootstrap";
-import {
-  Arrow90degRight,
-  ArrowRight,
-  BarChartFill,
-  BarChartLineFill,
-  BookmarkFill,
-  Check,
-  Check2,
-  Download,
-  EyeFill,
-  InfoSquareFill,
-  Newspaper,
-  PeopleFill,
-  ShieldCheck,
-} from "react-bootstrap-icons";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { ArrowRight, BarChartLineFill, Check2, EyeFill, PeopleFill, ShieldCheck, Pencil, PlusLg } from "react-bootstrap-icons";
 import imgProfile from "../assets/imgSection2Profile.svg";
+import { useParams } from "react-router";
 
 const RowCol1 = () => {
+  const { id } = useParams();
+
+  // console.log(id);
+
   return (
-    <Container className="mt-3 ">
+    <div className="mt-3 ">
       <Row>
         <Col>
           {/* inizio  prima sezione */}
@@ -35,8 +26,8 @@ const RowCol1 = () => {
             <div className="bg-white px-3">
               {/* inizio  immagine profilo */}
 
-              <div className="profile">
-                <div className="bg-white">
+              <div className="profile d-flex justify-content-between align-items-end">
+                <div className="">
                   <button className="rounded-circle border border-none bg-white ">
                     <img
                       className="rounded-circle "
@@ -46,6 +37,11 @@ const RowCol1 = () => {
                     />
                   </button>
                 </div>
+                {id === "me" && (
+                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                    <Pencil className="fs-3" />
+                  </div>
+                )}
               </div>
 
               {/* fine immagine profilo */}
@@ -190,7 +186,20 @@ const RowCol1 = () => {
           {/* fine terza sezione */}
           {/* inizio 4 sezione */}
           <div className=" bg-white mt-2 rounded pb-3 px-3">
-            <h2 className="fs-4 pt-3">Esperienza</h2>
+            <div className="d-flex align-items-center justify-content-between">
+              <h2 className="fs-4 pt-3">Esperienza</h2>
+
+              {id === "me" && (
+                <div className="d-flex align-items-center gap3">
+                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                    <PlusLg className="fs-3" />
+                  </div>
+                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                    <Pencil className="fs-3" />
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="d-flex align-items-center">
               <img
                 className="me-2"
@@ -208,7 +217,21 @@ const RowCol1 = () => {
           {/* inizio 5 sezione */}
           <div className=" bg-white mt-2 rounded p-3">
             <div className="bordoTratteggiato rounded p-2  ">
-              <h2 className="fs-4 pt-3">Formazione</h2>
+              <div className="d-flex align-items-center justify-content-between">
+                <h2 className="fs-4 pt-3">Formazione</h2>
+
+                {id === "me" && (
+                  <div className="d-flex align-items-center gap3">
+                    <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                      <PlusLg className="fs-3" />
+                    </div>
+                    <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                      <Pencil className="fs-3" />
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <p>Mostrando le tue qualifiche avrai fino a 2 volte più probabilità di ricevere un messaggio inMail da un recruiter</p>
               <div>
                 <div className="d-flex align-items-center text-secondary gap-2">
@@ -232,7 +255,21 @@ const RowCol1 = () => {
           {/* inizio 6 sezione */}
           <div className=" bg-white mt-2 rounded p-3">
             <div className="bordoTratteggiato rounded p-2  ">
-              <h2 className="fs-4 pt-3">Competenze</h2>
+              <div className="d-flex align-items-center justify-content-between">
+                <h2 className="fs-4 pt-3">Competenze</h2>
+
+                {id === "me" && (
+                  <div className="d-flex align-items-center gap3">
+                    <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                      <PlusLg className="fs-3" />
+                    </div>
+                    <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                      <Pencil className="fs-3" />
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <p>
                 Fai capire se hai un profilo adatto per le nuove opportunità: il 50% dei recruiter usa i dati sulle competenze per coprire le posizioni aperte
               </p>
@@ -273,7 +310,7 @@ const RowCol1 = () => {
           </div>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 export default RowCol1;

@@ -27,8 +27,18 @@ body {
 .linkDropo:hover {
   text-decoration: underline;
 }
+
+.dropLogin,
+.dropAziende,
 .positionTuButton {
   background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.positionTuButton {
   position: absolute;
   top: 60px;
   left: 49%;
@@ -39,7 +49,6 @@ body {
 }
 
 .dropLogin {
-  background-color: white;
   position: absolute;
   top: 60px;
   left: 49%;
@@ -54,7 +63,6 @@ body {
 }
 
 .dropAziende {
-  background-color: white;
   position: absolute;
   top: 60px;
   left: 35%;
@@ -183,4 +191,8 @@ body {
 
 .button-trasparenteVerde:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.toAdd:hover {
+  background-color: rgb(225, 222, 222);
 }
