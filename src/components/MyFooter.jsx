@@ -11,7 +11,7 @@ const MyFooter = () => {
 
   return (
     <Container>
-      <Row>
+      <Row xs={1} sm={2} md={3} lg={5}>
         <Col>
           <div className="d-flex flex-column justift-content-start align-items-start fw-semibold gap-3">
             <a href="#" className="footerLink">
