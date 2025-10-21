@@ -4,21 +4,32 @@ import imgProfile from "../assets/imgSection2Profile.svg";
 import { useParams } from "react-router";
 import { useState } from "react";
 import ModalEditProfile from "./ModalEditProfile";
+import { useSelector } from "react-redux";
+import ModalAddExperience from "./ModalAddExperience";
 
 const RowCol1 = ({ profileSelect }) => {
   const [viewModalProfile, setModalProfile] = useState(false);
+
+  const [viewModalExperience, setModalExperience] = useState(false);
 
   const callSetModalProfile = () => {
     setModalProfile(!viewModalProfile);
   };
 
+  const callSetModalExperience = () => {
+    setModalExperience(!viewModalExperience);
+  };
+
   const { id } = useParams();
 
+  let idIniziale = 0;
+  const allExperience = useSelector((state) => state.profileSelect.esperienze);
   // console.log(id);
 
   return (
     <div className="mt-3 ">
       {viewModalProfile && <ModalEditProfile callSetModalProfile={callSetModalProfile} />}
+      {viewModalExperience && <ModalAddExperience idForExperience={profileSelect._id} callSetModalExperience={callSetModalExperience} />}
       <Row>
         <Col>
           {/* inizio  prima sezione */}
@@ -198,7 +209,7 @@ const RowCol1 = ({ profileSelect }) => {
 
               {id === "me" && (
                 <div className="d-flex align-items-center gap3">
-                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalExperience}>
                     <PlusLg className="fs-3" />
                   </div>
                   <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
@@ -207,23 +218,21 @@ const RowCol1 = ({ profileSelect }) => {
                 </div>
               )}
             </div>
-            <div className="d-flex align-items-top gap-2">
-              <img
-                className="me-2"
-                style={{ width: "25px", height: "25px" }}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/877px-McDonald%27s_Golden_Arches.svg.png"
-                alt="badge lavoro "
-              />
-              <div className="d-flex flex-column ">
-                <h4 className="fw-semibold fs-5 m-0">Operaio</h4>
-                <p style={{ fontSize: "13px" }} className="m-0">
-                  MC DONALD
-                </p>
-                <p style={{ fontSize: "13px" }} className="m-0">
-                  {`Inizio: Fine:`}
-                </p>
+
+            {allExperience.map((esperienza) => (
+              <div key={idIniziale++} className="d-flex align-items-top gap-2">
+                <img className="me-2" style={{ width: "25px", height: "25px" }} src={esperienza?.image} alt="badge lavoro " />
+                <div className="d-flex flex-column ">
+                  <h4 className="fw-semibold fs-5 m-0">{esperienza.role}</h4>
+                  <p style={{ fontSize: "13px" }} className="m-0">
+                    {esperienza.company}
+                  </p>
+                  <p style={{ fontSize: "13px" }} className="m-0">
+                    {`Inizio:${esperienza.startDate} Fine:${esperienza.endDate}`}
+                  </p>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
           {/* fine 4 sezione */}
 
