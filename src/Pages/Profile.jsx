@@ -1,5 +1,11 @@
+import RowCol1 from "../components/RowCol1";
+
 const Profile = () => {
-  return <div>ciao</div>;
+  return (
+    <>
+      <RowCol1 />
+    </>
+  );
 };
 
 export default Profile;
