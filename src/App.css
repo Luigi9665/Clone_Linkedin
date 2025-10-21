@@ -37,8 +37,12 @@ body {
 }
 /* inizio  col salvatore */
 .profile {
-  margin-top: -112px;
+  margin-top: -60px;
   z-index: 4;
+}
+.copertina {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .verifica {
   border-style: dashed;
@@ -64,9 +68,9 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 .button-trasparenteBlu {
-  border: 2px solid #004182;
+  border: 2px solid #0b5ed7;
   background-color: transparent;
-  color: #004182;
+  color: #0b5ed7;
   padding: 5px 20px;
   font-size: 15px;
   font-weight: 500;
@@ -76,4 +80,27 @@ body {
 
 .button-trasparenteBlu:hover {
   background-color: rgba(69, 98, 192, 0.1);
+}
+.bordoTratteggiato {
+  border-style: dashed;
+  border-width: 2px;
+  box-shadow: none;
+  border-color: #cfdae5;
+}
+.button-trasparenteVerde {
+  border-bottom: 3px solid#004C33;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  background-color: transparent;
+  color: #004c33;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-trasparenteVerde:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
