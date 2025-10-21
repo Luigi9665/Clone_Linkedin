@@ -1,4 +1,5 @@
 import { Button, NavDropdown } from "react-bootstrap";
+import { Link } from "react-router";
 
 const MyDropDown = () => {
   return (
@@ -19,12 +20,14 @@ const MyDropDown = () => {
           </p>
         </div>
       </div>
-      <div className="d-flex gap-2 px-2 mt-1">
-        <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="outline-primary">
-          Visualizza
-          <br />
-          Profilo
-        </Button>
+      <div className="d-flex gap-2 px-2 mt-2">
+        <Link to="/profile/me">
+          <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="outline-primary">
+            Visualizza
+            <br />
+            Profilo
+          </Button>
+        </Link>
         <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="primary">
           Verifica
         </Button>
