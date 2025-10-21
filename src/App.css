@@ -31,7 +31,7 @@ body {
   background-color: white;
   position: absolute;
   top: 60px;
-  left: 53%;
+  left: 49%;
 }
 .positionTuButton a {
   letter-spacing: -0.2px;
@@ -56,4 +56,51 @@ body {
 
 .navbar-collapse {
   transition: all 0.3s ease !important;
+}
+
+.footerLink {
+  text-decoration: none;
+  color: #3d3d3c;
+  font-size: 13px;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+  color: #0a66c2;
+}
+
+.my-language-dropdown-toggle {
+  background-color: white;
+  color: #3d3d3c;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 0 0.5rem;
+}
+
+.my-language-dropdown-toggle:hover,
+.my-language-dropdown-toggle:focus {
+  border: 3px solid black;
+  background-color: white;
+  color: #3d3d3c;
+}
+
+.my-language-dropdown-menu {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+.my-language-dropdown-menu .dropdown-item {
+  color: #333;
+}
+
+.my-language-dropdown-menu .dropdown-item:hover {
+  background-color: #e9ecef;
+  color: #000;
+}
+
+.btn:first-child:active {
+  border: 3px solid black;
+  background-color: white;
+  color: #3d3d3c;
+  font-weight: 500;
 }

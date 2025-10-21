@@ -45,7 +45,7 @@ const MyNavBar = () => {
             style={{ width: "35px" }}
           />
         </Navbar.Brand>
-        <Form className="d-flex align-items-center me-5">
+        <Form className="d-flex align-items-center">
           <div className="input-group border border-dark rounded-pill bg-white d-flex align-items-center">
             <Button variant="link" className="rounded-pill d-flex align-items-center">
               <Search className=" text-dark" />
@@ -61,7 +61,7 @@ const MyNavBar = () => {
         </Form>
         <Navbar.Toggle onClick={handleToggle} aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav className="d-flex flex-row flex-nowrap align-items-center justify-content-center overflow-auto gap-2" style={{ maxHeight: "100px" }}>
+          <Nav className="d-flex flex-row flex-nowrap align-items-center justify-content-center overflow-auto gap-2 ms-lg-5" style={{ maxHeight: "100px" }}>
             <AllLinkNavbar />
             <ButtonDropdownTu visibleButtonTu={visibleButtonTu} />
             <div style={{ height: "50px", borderLeft: "1px solid #ebe4e4" }} className="ms-5"></div>
