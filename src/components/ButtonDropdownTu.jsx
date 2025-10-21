@@ -10,7 +10,7 @@ const ButtonDropdownTu = ({ visibleButtonTu }) => {
       className="d-flex justify-content-center align-items-center flex-column  p-0 ms-4"
       onClick={visibleButtonTu}
     >
-      <img src={profileState.image} alt="immagine profilo" style={{ width: "20px", borderRadius: "50%" }} />
+      <img src={profileState?.image} alt="immagine profilo" style={{ width: "20px", borderRadius: "50%" }} />
       <p style={{ fontSize: "11px", color: "grey" }} className="d-none d-xl-block m-0">
         Tu
         <CaretDownFill />
