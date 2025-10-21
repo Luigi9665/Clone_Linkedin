@@ -2,14 +2,23 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { ArrowRight, BarChartLineFill, Check2, EyeFill, PeopleFill, ShieldCheck, Pencil, PlusLg } from "react-bootstrap-icons";
 import imgProfile from "../assets/imgSection2Profile.svg";
 import { useParams } from "react-router";
+import { useState } from "react";
+import ModalEditProfile from "./ModalEditProfile";
 
-const RowCol1 = () => {
+const RowCol1 = ({ profileSelect }) => {
+  const [viewModalProfile, setModalProfile] = useState(false);
+
+  const callSetModalProfile = () => {
+    setModalProfile(!viewModalProfile);
+  };
+
   const { id } = useParams();
 
   // console.log(id);
 
   return (
     <div className="mt-3 ">
+      {viewModalProfile && <ModalEditProfile callSetModalProfile={callSetModalProfile} />}
       <Row>
         <Col>
           {/* inizio  prima sezione */}
@@ -23,22 +32,17 @@ const RowCol1 = () => {
               />
             </div>
 
-            <div className="bg-white px-3">
+            <div className="bg-white rounded-bottom-2 px-3">
               {/* inizio  immagine profilo */}
 
               <div className="profile d-flex justify-content-between align-items-end">
                 <div className="">
                   <button className="rounded-circle border border-none bg-white ">
-                    <img
-                      className="rounded-circle "
-                      style={{ width: "100px", objectFit: "cover" }}
-                      src="https://img.icons8.com/?size=1200&id=23461&format=jpg"
-                      alt="img profilo"
-                    />
+                    <img className="rounded-circle " style={{ width: "100px", objectFit: "cover" }} src={profileSelect.image} alt="img profilo" />
                   </button>
                 </div>
                 {id === "me" && (
-                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalProfile}>
                     <Pencil className="fs-3" />
                   </div>
                 )}
@@ -48,18 +52,20 @@ const RowCol1 = () => {
               <div className="bg-white">
                 <Row className="px-2  ">
                   <Col>
-                    <h1 className="fs-3">Salvatore Di Cesare</h1>
-                    <div className="d-flex align-items-center verifica rounded-pill px-2 text-center ">
-                      <ShieldCheck />
-                      <a className="text-decoration-none fw-semibold" href="#">
-                        {" "}
-                        Aggiungi badge di verifica
-                      </a>
+                    <div className="d-flex flex-column flex-lg-row">
+                      <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
+                      <div className="d-flex align-items-center verifica rounded-pill px-2 text-center ">
+                        <ShieldCheck />
+                        <a className="text-decoration-none fw-semibold" href="#">
+                          {" "}
+                          Aggiungi badge di verifica
+                        </a>
+                      </div>
                     </div>
 
-                    <p>Operaio presso BLABLA</p>
+                    <p>{`${profileSelect.title}`}</p>
                     <p style={{ color: "#666666" }}>
-                      Napoli,Campania,Italia{" "}
+                      {`${profileSelect.area}`}{" "}
                       <a className="text-decoration-none fw-semibold" href="#">
                         {" "}
                         Informazioni di contatto{" "}
@@ -67,13 +73,13 @@ const RowCol1 = () => {
                     </p>
                   </Col>
                   <Col className="p-0">
-                    <div className="d-flex gap-2 mt-1">
-                      <img
+                    <div className="d-flex justify-content-end gap-2 mt-1">
+                      {/* <img
                         style={{ width: "25px", height: "25px" }}
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/877px-McDonald%27s_Golden_Arches.svg.png"
                         alt="badge lavoro "
-                      />
-                      <p className="fw-semibold ">McDonald's</p>
+                      /> */}
+                      <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
                     </div>
                   </Col>
                 </Row>
@@ -154,7 +160,7 @@ const RowCol1 = () => {
               <Row>
                 <Col xs={12} md={4}>
                   <Row>
-                    <Col className="pe-0" xs={1}>
+                    <Col className="me-2" xs={1}>
                       <PeopleFill />
                     </Col>
                     <Col className="ps-0" xs={6}>
@@ -165,7 +171,7 @@ const RowCol1 = () => {
                 </Col>
                 <Col xs={12} md={4}>
                   <Row>
-                    <Col xs={1}>
+                    <Col className="me-2" xs={1}>
                       <BarChartLineFill />
                     </Col>
                     <Col className="ps-0" xs={6}>
@@ -184,9 +190,10 @@ const RowCol1 = () => {
             </div>
           </div>
           {/* fine terza sezione */}
+
           {/* inizio 4 sezione */}
-          <div className=" bg-white mt-2 rounded pb-3 px-3">
-            <div className="d-flex align-items-center justify-content-between">
+          <div className=" bg-white mt-2 rounded p-3">
+            <div className="d-flex align-items-center justify-content-between mb-3">
               <h2 className="fs-4 pt-3">Esperienza</h2>
 
               {id === "me" && (
@@ -200,7 +207,7 @@ const RowCol1 = () => {
                 </div>
               )}
             </div>
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-top gap-2">
               <img
                 className="me-2"
                 style={{ width: "25px", height: "25px" }}
@@ -208,12 +215,18 @@ const RowCol1 = () => {
                 alt="badge lavoro "
               />
               <div className="d-flex flex-column ">
-                <div className="fw-semibold">Operaio</div>
-                <div>MC DONALD</div>
+                <h4 className="fw-semibold fs-5 m-0">Operaio</h4>
+                <p style={{ fontSize: "13px" }} className="m-0">
+                  MC DONALD
+                </p>
+                <p style={{ fontSize: "13px" }} className="m-0">
+                  {`Inizio: Fine:`}
+                </p>
               </div>
             </div>
           </div>
           {/* fine 4 sezione */}
+
           {/* inizio 5 sezione */}
           <div className=" bg-white mt-2 rounded p-3">
             <div className="bordoTratteggiato rounded p-2  ">

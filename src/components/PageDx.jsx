@@ -33,7 +33,9 @@ const PageDx = () => {
                   </div>
                 )}
               </h5>
-              <p className="text-secondary ">www.linkedin.com/in/rebecca-matarozzo-7ba1a219b</p>
+              <p style={{ fontSize: "12px" }} className="text-secondary">
+                www.linkedin.com/in/rebecca-matarozzo-7ba1a219b
+              </p>
             </Col>
           </Row>
           {/* ALTRI PROFILI CPNSULTATI DX */}
