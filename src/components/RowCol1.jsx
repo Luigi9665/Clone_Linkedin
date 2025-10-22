@@ -241,14 +241,14 @@ const RowCol1 = ({ profileSelect }) => {
               </div>
 
               {allExperience.map((esperienza) => (
-                <div key={esperienza._id} className="d-flex align-items-top gap-2 mb-2">
+                <div key={esperienza._id} style={{ borderBottom: "1px solid grey" }} className="d-flex align-items-top gap-2 mb-4">
                   <img className="me-2" style={{ width: "25px", height: "25px" }} src={esperienza?.image} alt="badge lavoro " />
                   <div className="d-flex flex-column ">
                     <h4 className="fw-semibold fs-5 m-0">{esperienza.role}</h4>
                     <p style={{ fontSize: "13px" }} className="m-0">
                       {esperienza.company}
                     </p>
-                    <p style={{ fontSize: "13px" }} className="m-0">
+                    <p style={{ fontSize: "13px" }} className="m-0 mb-3">
                       {`Inizio: ${formatDate(esperienza.startDate)}   Fine: ${formatDate(esperienza.endDate)} -  ${
                         getDateDifference(esperienza.startDate, esperienza.endDate).years
                       } anni e ${getDateDifference(esperienza.startDate, esperienza.endDate).months} mesi`}

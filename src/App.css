@@ -212,7 +212,13 @@ body {
 }
 
 .modalModProfile {
-  padding-block: 15px;
-  width: 70%;
+  padding-block: 4rem;
+  width: 40%;
   position: absolute;
+}
+
+@media (max-width: 991px) {
+  .modalModProfile {
+    width: 70%;
+  }
 }

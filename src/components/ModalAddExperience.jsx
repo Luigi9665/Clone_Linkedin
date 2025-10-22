@@ -52,7 +52,7 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
       if (!response.ok) {
         throw new Error("Errore durante l'invio");
       } else {
-        setMessage({ type: "success", text: "Esperienza aggiunta con successo!" });
+        setMessage({ type: "success", text: idExperience ? "Esperienza modificata con successo!" : "Esperienza aggiunta con successo!" });
         setFormData({
           role: "",
           company: "",
@@ -64,10 +64,40 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
         setTimeout(() => {
           callSetModalExperience();
           dispatch(getEsperienzeAction(idProfile));
-        }, 2000);
+        }, 1500);
       }
     } catch (err) {
       setMessage({ type: "danger", text: err.message });
+    }
+  };
+
+  const deleteExperience = async () => {
+    try {
+      let response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        setMessage({ type: "success", text: "Esperienza eliminata con successo!" });
+        setFormData({
+          role: "",
+          company: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+          area: "",
+        });
+        setTimeout(() => {
+          callSetModalExperience();
+          dispatch(getEsperienzeAction(idProfile));
+        }, 1500);
+      } else {
+        throw new Error(response.status);
+      }
+    } catch (error) {
+      setMessage({ type: "danger", text: error.message });
     }
   };
 
@@ -112,7 +142,7 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
   return (
     <div className="overlay">
       <Row className="modalModProfile justify-content-center">
-        <Col md={8} lg={6}>
+        <Col xs={12} lg={10}>
           <h3 className="text-center">Aggiungi una nuova esperienza</h3>
           <XCircleFill
             style={{ cursor: "pointer", fontSize: "30px", position: "absolute", top: "5px", right: "5px" }}
@@ -166,7 +196,8 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
                 {idExperience ? "Modifica Esperienza" : "Salva Esperienza"}
               </Button>
               {idExperience ? (
-                <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
+                <Button variant="danger" type="button" className="w-50" onClick={deleteExperience}>
+                  {/* AGGIUNGI FETCH DELETE */}
                   Elimina Esperienza
                 </Button>
               ) : (
