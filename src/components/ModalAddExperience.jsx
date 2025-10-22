@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
-import { addProfileAction, getEsperienzeAction } from "../redux/action";
+// import { useParams } from "react-router";
+import { getEsperienzeAction } from "../redux/action";
 
-const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
+const ModalAddExperience = ({ idProfile, callSetModalExperience }) => {
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -15,11 +15,11 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
     area: "",
   });
 
-  const url = `https://striveschool-api.herokuapp.com/api/profile/${idForExperience}/experiences`;
+  const url = `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences`;
   const key = import.meta.env.VITE_TOKEN_API;
 
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const [message, setMessage] = useState(null);
 
@@ -58,7 +58,7 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
         });
         setTimeout(() => {
           callSetModalExperience();
-          dispatch(getEsperienzeAction(idForExperience));
+          dispatch(getEsperienzeAction(idProfile));
         }, 2000);
       }
     } catch (err) {

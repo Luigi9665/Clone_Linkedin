@@ -1,5 +1,5 @@
-import { ADD_PROFILE, GET_ESPERIENZE } from "../action";
-import { ADD_ESPERIENZE } from "../action";
+import { ADD_PROFILE, DELETE_ESPERIENZE, GET_ESPERIENZE } from "../action";
+
 const initialState = {
   content: null,
   esperienze: [],
@@ -17,10 +17,10 @@ const profileFetchReducer = (state = initialState, action) => {
         ...state,
         esperienze: action.payload,
       };
-    case ADD_ESPERIENZE:
+    case DELETE_ESPERIENZE:
       return {
         ...state,
-        esperienze: [...state.esperienze, action.payload],
+        esperienze: [],
       };
 
     default:
