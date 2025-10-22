@@ -16,16 +16,20 @@ const ListPostHome = () => {
     dispatch(getPostAction());
   }, []);
 
-  const handleScroll = () => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-      setView(countView + 10);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const onScroll = () => {
+      if (countView >= listPost.length) return;
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        setView((prev) => {
+          const next = prev + 10;
+          return next > listPost.length ? listPost.length : next;
+        });
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [listPost.length, countView]);
 
   return (
     <>
