@@ -15,8 +15,6 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
     area: "",
   });
 
-  console.log("idExperience", idExperience);
-
   const url = idExperience
     ? `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences/${idExperience}`
     : `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences`;
@@ -86,8 +84,8 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
         setFormData({
           role: singleEsperienza.role,
           company: singleEsperienza.company,
-          startDate: singleEsperienza.startDate,
-          endDate: singleEsperienza.endDate,
+          startDate: singleEsperienza.startDate.split("T")[0],
+          endDate: singleEsperienza.endDate.split("T")[0],
           description: singleEsperienza.description,
           area: singleEsperienza.area,
         });
@@ -109,16 +107,18 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
     if (idExperience) {
       getSingleExperience();
     }
-  }, [idExperience]);
+  }, []);
 
   return (
     <div className="overlay">
       <Row className="modalModProfile justify-content-center">
         <Col md={8} lg={6}>
-          <div className="d-flex align-items-center justify-content-between">
-            <h3 className="text-center">Aggiungi una nuova esperienza</h3>
-            <XCircleFill style={{ cursor: "pointer", fontSize: "30px" }} className="text-danger" onClick={callSetModalExperience} />
-          </div>
+          <h3 className="text-center">Aggiungi una nuova esperienza</h3>
+          <XCircleFill
+            style={{ cursor: "pointer", fontSize: "30px", position: "absolute", top: "5px", right: "5px" }}
+            className="text-danger"
+            onClick={callSetModalExperience}
+          />
           {message && (
             <Alert variant={message.type} onClose={() => setMessage(null)} dismissible>
               {message.text}
@@ -165,9 +165,15 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
               <Button variant={`${idExperience ? "warning" : "primary"}`} type="submit" className="w-50">
                 {idExperience ? "Modifica Esperienza" : "Salva Esperienza"}
               </Button>
-              <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
-                Annulla
-              </Button>
+              {idExperience ? (
+                <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
+                  Elimina Esperienza
+                </Button>
+              ) : (
+                <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
+                  Annulla
+                </Button>
+              )}
             </div>
           </Form>
         </Col>
