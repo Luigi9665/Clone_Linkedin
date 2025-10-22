@@ -17,6 +17,7 @@ import {
 } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 import ListPostHome from "./ListPostHome";
+import FormPost from "./FormPost";
 
 const ColCenterHomePage = () => {
   const profileSelect = useSelector((state) => state.profileSelect.content);
@@ -31,13 +32,11 @@ const ColCenterHomePage = () => {
               <img className="rounded-circle " style={{ width: "100%" }} src={profileSelect.image} alt="img profilo" />
             </Col>
             <Col xs={11}>
-              <InputGroup className="">
-                <Form.Control placeholder="Crea un post" className="fw-semibold rounded-pill py-3 border border-secondary" />
-              </InputGroup>
+              <FormPost />
             </Col>
           </Col>
           <Col xs={12} className="d-flex mt-3">
-            <Col xs={4} className="d-flex justify-content-center">
+            <Col xs={4} className="d-flex justify-content-center align-items-center">
               <Button variant="outline-secondary  " style={{ border: "none" }} className="d-flex align-items-center fw-semibold fs-5">
                 <PlayBtnFill className="fs-3 text-success me-2" /> Video
               </Button>

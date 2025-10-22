@@ -31,12 +31,12 @@ const ColLeftHomePage = () => {
         <Container>
           <Row className="px-2  ">
             <Col>
-              <div className="d-flex flex-column flex-lg-row">
+              <div className="d-flex flex-column flex-lg-row ">
                 <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
               </div>
 
               <p>{`${profileSelect.title}`}</p>
-              <p style={{ color: "#666666" }}>
+              <p className="text-truncate" style={{ color: "#666666" }}>
                 {`${profileSelect.area}`}{" "}
                 <a className="text-decoration-none fw-semibold" href="#">
                   {" "}
