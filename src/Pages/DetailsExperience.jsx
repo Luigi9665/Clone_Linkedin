@@ -6,13 +6,26 @@ import ModalAddExperience from "../components/ModalAddExperience";
 
 const DetailsExperience = () => {
   const [viewModalExperience, setModalExperience] = useState(false);
+  const [idExp, setIdExp] = useState("");
 
   const profileSelect = useSelector((state) => state.profileSelect.content);
   const allExperience = useSelector((state) => state.profileSelect.esperienze);
 
-  const callSetModalExperience = () => {
+  const setModal = () => {
+    setIdExp("");
     setModalExperience(!viewModalExperience);
   };
+  const setModalMod = (id) => {
+    setIdExp(id);
+    setModalExperience(!viewModalExperience);
+  };
+
+  const callModalAddExperience = () => {
+    return <ModalAddExperience idProfile={profileSelect._id} callSetModalExperience={setModal} idExperience={idExp} />;
+  };
+  // const callModalModExperience = (idExp) => {
+  //   return <ModalAddExperience idProfile={profileSelect._id} callSetModalExperience={setModal} idExperience={idExp}/>;
+  // };
 
   // FUNZIONE PER FORMATTARE LA DATA
   const formatDate = (dateString) => {
@@ -35,14 +48,14 @@ const DetailsExperience = () => {
 
   return (
     <Container style={{ marginBlock: "2rem 10rem" }}>
-      {viewModalExperience && <ModalAddExperience idProfile={profileSelect._id} callSetModalExperience={callSetModalExperience} />}
+      {viewModalExperience && callModalAddExperience()}
       <div className=" bg-white mt-2 rounded p-3 border shadow">
         <div className={`${allExperience.length > 0 ? "" : "bordoTratteggiato rounded p-2"}`}>
           <div className="d-flex align-items-center justify-content-between mb-3">
             <h2 className="fs-4 pt-3">Esperienza</h2>
 
             <div className="d-flex align-items-center gap3">
-              <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalExperience}>
+              <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={setModal}>
                 <PlusLg className="fs-3" />
               </div>
             </div>
@@ -54,7 +67,7 @@ const DetailsExperience = () => {
               <div className="d-flex flex-column flex-fill ">
                 <div className="d-flex align-items-center justify-content-between">
                   <h4 className="fw-semibold fs-5 m-0">{esperienza.role}</h4>
-                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={() => setModalMod(esperienza._id)}>
                     <Pencil className="fs-3" />
                   </div>
                 </div>

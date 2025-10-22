@@ -36,7 +36,7 @@ const MyDropDown = ({ visibleButtonTu }) => {
         </div>
       </div>
       <div className="d-flex gap-2 px-2 mt-2">
-        <Link to="/profile/me">
+        <Link to="/profile/me" onClick={visibleButtonTu}>
           <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="outline-primary">
             Visualizza
             <br />
