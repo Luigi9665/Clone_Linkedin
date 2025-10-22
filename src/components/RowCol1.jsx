@@ -66,7 +66,7 @@ const RowCol1 = ({ profileSelect }) => {
 
               <div className="profile d-flex justify-content-between align-items-end">
                 <div className="">
-                  <button className="rounded-circle border border-none bg-white ">
+                  <button className="rounded-circle border border-none bg-white p-1">
                     <img className="rounded-circle " style={{ width: "100px", objectFit: "cover" }} src={profileSelect.image} alt="img profilo" />
                   </button>
                 </div>
@@ -79,39 +79,41 @@ const RowCol1 = ({ profileSelect }) => {
 
               {/* fine immagine profilo */}
               <div className="bg-white">
-                <Row className="px-2  ">
-                  <Col>
-                    <div className="d-flex flex-column flex-lg-row">
-                      <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
-                      <div className="d-flex align-items-center verifica rounded-pill px-2 text-center ">
-                        <ShieldCheck />
+                <Container fluid>
+                  <Row className="px-2  ">
+                    <Col>
+                      <div className="d-flex flex-column flex-lg-row">
+                        <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
+                        <div className="d-flex align-items-center verifica rounded-pill  text-center px-2 py-1 ">
+                          <ShieldCheck />
+                          <a style={{ minInlineSize: "max-content" }} className="text-decoration-none fw-semibold" href="#">
+                            {" "}
+                            Aggiungi badge di verifica
+                          </a>
+                        </div>
+                      </div>
+
+                      <p>{`${profileSelect.title}`}</p>
+                      <p style={{ color: "#666666" }}>
+                        {`${profileSelect.area}`}{" "}
                         <a className="text-decoration-none fw-semibold" href="#">
                           {" "}
-                          Aggiungi badge di verifica
+                          Informazioni di contatto{" "}
                         </a>
-                      </div>
-                    </div>
-
-                    <p>{`${profileSelect.title}`}</p>
-                    <p style={{ color: "#666666" }}>
-                      {`${profileSelect.area}`}{" "}
-                      <a className="text-decoration-none fw-semibold" href="#">
-                        {" "}
-                        Informazioni di contatto{" "}
-                      </a>
-                    </p>
-                  </Col>
-                  <Col className="p-0">
-                    <div className="d-flex justify-content-end gap-2 mt-1">
-                      {/* <img
+                      </p>
+                    </Col>
+                    <Col className="p-0">
+                      <div className="d-flex justify-content-end gap-2 mt-1">
+                        {/* <img
                         style={{ width: "25px", height: "25px" }}
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/877px-McDonald%27s_Golden_Arches.svg.png"
                         alt="badge lavoro "
                       /> */}
-                      <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
-                    </div>
-                  </Col>
-                </Row>
+                        <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
+                      </div>
+                    </Col>
+                  </Row>
+                </Container>
               </div>
               {/* inizio bottoni  */}
               <div className=" align-items-top d-flex pb-3 bg-white rounded-bottom-2  ">
