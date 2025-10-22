@@ -15,24 +15,22 @@ import {
   X,
   XLg,
 } from "react-bootstrap-icons";
+import { useSelector } from "react-redux";
 
 const ColCenterHomePage = () => {
+  const profileSelect = useSelector((state) => state.profileSelect.content);
+
   return (
     <>
       <Container>
         {/* CREA UN POST HOME */}
         <Row className="bg-white rounded mt-3 p-3  border border-secondary ">
           <Col xs={12} className="d-flex align-items-center">
-            <Col xs={1}>
-              <img
-                className="rounded-circle"
-                style={{ width: "100%" }}
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-kZSsJkRO4sWf0LBfTAedCw4hV6MLsVEUTA&s"
-                alt="img profilo"
-              />
+            <Col xs={1} className="me-2">
+              <img className="rounded-circle " style={{ width: "100%" }} src={profileSelect.image} alt="img profilo" />
             </Col>
             <Col xs={11}>
-              <InputGroup size="lg" className="">
+              <InputGroup className="">
                 <Form.Control placeholder="Crea un post" className="fw-semibold rounded-pill py-3 border border-secondary" />
               </InputGroup>
             </Col>
@@ -43,12 +41,12 @@ const ColCenterHomePage = () => {
                 <PlayBtnFill className="fs-3 text-success me-2" /> Video
               </Button>
             </Col>
-            <Col xs={4}>
+            <Col xs={4} className="d-flex justify-content-center">
               <Button variant="outline-secondary " style={{ border: "none" }} className=" d-flex align-items-centerfw-semibold fs-5">
                 <Image className="fs-3 text-primary me-2" /> Foto
               </Button>
             </Col>
-            <Col xs={4}>
+            <Col xs={4} className="d-flex justify-content-center">
               <Button variant="outline-secondary " style={{ border: "none" }} className="d-flex align-items-center fw-semibold fs-5">
                 <FileTextFill className="fs-3 text-danger me-2" /> Scrivi un articolo
               </Button>
@@ -77,11 +75,11 @@ const ColCenterHomePage = () => {
             </Col>
 
             <Col xs={3} className="d-flex align-items-baseline justify-content-end">
-              <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
-                <ThreeDots className="fs-3" />
+              <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
+                <ThreeDots className="fs-5" />
               </div>
-              <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
-                <XLg className="fs-3" />
+              <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
+                <XLg className="fs-5" />
               </div>
             </Col>
           </Col>

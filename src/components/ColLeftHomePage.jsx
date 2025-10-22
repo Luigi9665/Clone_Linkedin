@@ -9,7 +9,7 @@ const ColLeftHomePage = () => {
       <div className="top-card-background-hero-image ">
         <img
           className="copertina"
-          style={{ width: "100%", height: "250px", objectFit: "cover" }}
+          style={{ width: "100%", height: "100px", objectFit: "cover" }}
           src="https://images.unsplash.com/photo-1587387119725-9d6bac0f22fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
           alt="copertina"
         />
