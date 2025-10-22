@@ -35,8 +35,8 @@ const ColCenterHomePage = () => {
               <FormPost />
             </Col>
           </Col>
-          <Col xs={12} className="d-flex mt-3">
-            <Col xs={4} className="d-flex justify-content-center align-items-center">
+          <Col xs={12} className="d-flex mt-3 align-items-center">
+            <Col xs={4} className="d-flex justify-content-center ">
               <Button variant="outline-secondary  " style={{ border: "none" }} className="d-flex align-items-center fw-semibold fs-5">
                 <PlayBtnFill className="fs-3 text-success me-2" /> Video
               </Button>

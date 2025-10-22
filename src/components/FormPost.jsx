@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { SendFill } from "react-bootstrap-icons";
+import { useDispatch } from "react-redux";
+import { getPostAction } from "../redux/action";
 
 const FormPost = () => {
   const [inputText, setText] = useState("");
 
   const url = "https://striveschool-api.herokuapp.com/api/posts/";
   const key = import.meta.env.VITE_TOKEN_API;
+  const dispatch = useDispatch();
   const fetchPost = async () => {
     const sendToApi = {
       text: inputText,
@@ -25,6 +28,7 @@ const FormPost = () => {
         throw new Error("Errore durante l'invio");
       } else {
         setText("");
+        dispatch(getPostAction());
       }
     } catch (err) {
       console.log(err);
