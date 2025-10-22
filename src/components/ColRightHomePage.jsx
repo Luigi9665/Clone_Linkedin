@@ -46,8 +46,8 @@ const ColRightHomePage = () => {
       </div>
       <footer className="mt-3 ">
         <div>
-          <div style={{ flexDirection: "column" }} className=" d-flex align-items-center gap-4 ">
-            <div className="d-flex gap-2 ">
+          <div className=" d-flex align-items-center gap-4 ">
+            <div style={{ flexWrap: "wrap" }} className="d-flex gap-2 gap-xl-1 mb-3 align-items-center justify-content-center">
               <a className="linkFooterHomePage" href="#">
                 Informazioni
               </a>
@@ -59,8 +59,7 @@ const ColRightHomePage = () => {
               <a className="linkFooterHomePage" href="#">
                 Centro assistenza
               </a>
-            </div>
-            <div className="d-flex gap-3 ">
+
               <a className="linkFooterHomePage" href="#">
                 Privacy e condizioni
               </a>
