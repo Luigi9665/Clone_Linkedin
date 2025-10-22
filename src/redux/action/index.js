@@ -1,12 +1,14 @@
 export const ADD_PROFILE = "ADD_PROFILE";
 export const LOG_IN = "LOG_IN";
-export const ADD_ESPERIENZE = "ADD_ESPERIENZE";
+export const DELETE_ESPERIENZE = "DELETE_ESPERIENZE";
 export const GET_ESPERIENZE = "GET_ESPERIENZE";
 // IMPORT DELLA CHIAVE PER LE FETCH
 const key = import.meta.env.VITE_TOKEN_API;
 
 // FUNIONI PER RICHIAMARE LE AZIONI DEI REDUCERS
 export const loginAction = (user) => ({ type: LOG_IN, payload: user });
+
+export const deleteExperienceAction = () => ({ type: DELETE_ESPERIENZE });
 
 // FETCH PER IL PROFILO SELEZIONATO
 export const addProfileAction = (indiceRicerca) => {

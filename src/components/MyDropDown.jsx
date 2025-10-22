@@ -1,7 +1,7 @@
 import { Button, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../redux/action";
+import { deleteExperienceAction, loginAction } from "../redux/action";
 
 const MyDropDown = ({ visibleButtonTu }) => {
   // IMPORTARSI IL DISPATCH E L'AZIONE PER LA FETCH IN CASO DI ERRORE NEL LOG IN
@@ -12,6 +12,7 @@ const MyDropDown = ({ visibleButtonTu }) => {
 
   const setDrop = () => {
     dispatch(loginAction(""));
+    dispatch(deleteExperienceAction());
     visibleButtonTu();
   };
 
@@ -35,7 +36,7 @@ const MyDropDown = ({ visibleButtonTu }) => {
         </div>
       </div>
       <div className="d-flex gap-2 px-2 mt-2">
-        <Link to="/profile/me">
+        <Link to="/profile/me" onClick={visibleButtonTu}>
           <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="outline-primary">
             Visualizza
             <br />

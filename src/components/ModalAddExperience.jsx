@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
-import { addProfileAction, getEsperienzeAction } from "../redux/action";
+// import { useParams } from "react-router";
+import { getEsperienzeAction } from "../redux/action";
 
-const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
+const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience }) => {
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -15,11 +15,16 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
     area: "",
   });
 
-  const url = `https://striveschool-api.herokuapp.com/api/profile/${idForExperience}/experiences`;
+  const url = idExperience
+    ? `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences/${idExperience}`
+    : `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences`;
+
+  const method = idExperience ? "PUT" : "POST";
+
   const key = import.meta.env.VITE_TOKEN_API;
 
   const dispatch = useDispatch();
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const [message, setMessage] = useState(null);
 
@@ -36,7 +41,7 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
 
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: key,
@@ -47,7 +52,7 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
       if (!response.ok) {
         throw new Error("Errore durante l'invio");
       } else {
-        setMessage({ type: "success", text: "Esperienza aggiunta con successo!" });
+        setMessage({ type: "success", text: idExperience ? "Esperienza modificata con successo!" : "Esperienza aggiunta con successo!" });
         setFormData({
           role: "",
           company: "",
@@ -58,22 +63,92 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
         });
         setTimeout(() => {
           callSetModalExperience();
-          dispatch(getEsperienzeAction(idForExperience));
-        }, 2000);
+          dispatch(getEsperienzeAction(idProfile));
+        }, 1500);
       }
     } catch (err) {
       setMessage({ type: "danger", text: err.message });
     }
   };
 
+  const deleteExperience = async () => {
+    try {
+      let response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        setMessage({ type: "success", text: "Esperienza eliminata con successo!" });
+        setFormData({
+          role: "",
+          company: "",
+          startDate: "",
+          endDate: "",
+          description: "",
+          area: "",
+        });
+        setTimeout(() => {
+          callSetModalExperience();
+          dispatch(getEsperienzeAction(idProfile));
+        }, 1500);
+      } else {
+        throw new Error(response.status);
+      }
+    } catch (error) {
+      setMessage({ type: "danger", text: error.message });
+    }
+  };
+
+  const getSingleExperience = async () => {
+    try {
+      let response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        const singleEsperienza = await response.json();
+        setFormData({
+          role: singleEsperienza.role,
+          company: singleEsperienza.company,
+          startDate: singleEsperienza.startDate.split("T")[0],
+          endDate: singleEsperienza.endDate.split("T")[0],
+          description: singleEsperienza.description,
+          area: singleEsperienza.area,
+        });
+      } else if (response.status === 401 || response.status === 403) {
+        throw new Error("Autorizzazione fallita, controlla la tua API key.");
+      } else if (response.status === 404) {
+        throw new Error("Risorsa non trovata (404). Riprova con la ricerca.");
+      } else if (response.status >= 500) {
+        throw new Error("Errore del server, riprova più tardi.");
+      } else {
+        throw new Error("Errore nella richiesta: " + response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (idExperience) {
+      getSingleExperience();
+    }
+  }, []);
+
   return (
     <div className="overlay">
       <Row className="modalModProfile justify-content-center">
-        <Col md={8} lg={6}>
-          <div className="d-flex align-items-center justify-content-between">
-            <h3 className="text-center">Aggiungi una nuova esperienza</h3>
-            <XCircleFill style={{ cursor: "pointer", fontSize: "30px" }} className="text-danger" onClick={callSetModalExperience} />
-          </div>
+        <Col xs={12} lg={10}>
+          <h3 className="text-center">Aggiungi una nuova esperienza</h3>
+          <XCircleFill
+            style={{ cursor: "pointer", fontSize: "30px", position: "absolute", top: "5px", right: "5px" }}
+            className="text-danger"
+            onClick={callSetModalExperience}
+          />
           {message && (
             <Alert variant={message.type} onClose={() => setMessage(null)} dismissible>
               {message.text}
@@ -117,12 +192,19 @@ const ModalAddExperience = ({ idForExperience, callSetModalExperience }) => {
             </Form.Group>
 
             <div className="d-flex align-items-center justify-content-center gap-3">
-              <Button variant="primary" type="submit" className="w-50">
-                Salva profilo
+              <Button variant={`${idExperience ? "warning" : "primary"}`} type="submit" className="w-50">
+                {idExperience ? "Modifica Esperienza" : "Salva Esperienza"}
               </Button>
-              <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
-                Annulla
-              </Button>
+              {idExperience ? (
+                <Button variant="danger" type="button" className="w-50" onClick={deleteExperience}>
+                  {/* AGGIUNGI FETCH DELETE */}
+                  Elimina Esperienza
+                </Button>
+              ) : (
+                <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
+                  Annulla
+                </Button>
+              )}
             </div>
           </Form>
         </Col>

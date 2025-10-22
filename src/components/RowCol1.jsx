@@ -1,7 +1,7 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { ArrowRight, BarChartLineFill, Check2, EyeFill, PeopleFill, ShieldCheck, Pencil, PlusLg } from "react-bootstrap-icons";
 import imgProfile from "../assets/imgSection2Profile.svg";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useState } from "react";
 import ModalEditProfile from "./ModalEditProfile";
 import { useSelector } from "react-redux";
@@ -22,14 +22,32 @@ const RowCol1 = ({ profileSelect }) => {
 
   const { id } = useParams();
 
-  let idIniziale = 0;
   const allExperience = useSelector((state) => state.profileSelect.esperienze);
   // console.log(id);
+
+  // FUNZIONE PER FORMATTARE LA DATA
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    if (isNaN(date)) return "";
+    return date.toLocaleDateString("it-IT");
+  };
+
+  function getDateDifference(startDate, endDate) {
+    const start = new Date(startDate);
+
+    const end = new Date(endDate);
+
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
+
+    return { years, months };
+  }
 
   return (
     <div className="mt-3 ">
       {viewModalProfile && <ModalEditProfile callSetModalProfile={callSetModalProfile} />}
-      {viewModalExperience && <ModalAddExperience idForExperience={profileSelect._id} callSetModalExperience={callSetModalExperience} />}
+      {viewModalExperience && <ModalAddExperience idProfile={profileSelect._id} callSetModalExperience={callSetModalExperience} />}
       <Row>
         <Col>
           {/* inizio  prima sezione */}
@@ -204,35 +222,41 @@ const RowCol1 = ({ profileSelect }) => {
 
           {/* inizio 4 sezione */}
           <div className=" bg-white mt-2 rounded p-3">
-            <div className="d-flex align-items-center justify-content-between mb-3">
-              <h2 className="fs-4 pt-3">Esperienza</h2>
+            <div className={`${allExperience.length > 0 ? "" : "bordoTratteggiato rounded p-2"}`}>
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <h2 className="fs-4 pt-3">Esperienza</h2>
 
-              {id === "me" && (
-                <div className="d-flex align-items-center gap3">
-                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalExperience}>
-                    <PlusLg className="fs-3" />
+                {id === "me" && (
+                  <div className="d-flex align-items-center gap3">
+                    <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalExperience}>
+                      <PlusLg className="fs-3" />
+                    </div>
+                    <Link to="/details/experience" style={{ color: "black" }}>
+                      <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
+                        <Pencil className="fs-3" />
+                      </div>
+                    </Link>
                   </div>
-                  <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2">
-                    <Pencil className="fs-3" />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {allExperience.map((esperienza) => (
-              <div key={idIniziale++} className="d-flex align-items-top gap-2">
-                <img className="me-2" style={{ width: "25px", height: "25px" }} src={esperienza?.image} alt="badge lavoro " />
-                <div className="d-flex flex-column ">
-                  <h4 className="fw-semibold fs-5 m-0">{esperienza.role}</h4>
-                  <p style={{ fontSize: "13px" }} className="m-0">
-                    {esperienza.company}
-                  </p>
-                  <p style={{ fontSize: "13px" }} className="m-0">
-                    {`Inizio:${esperienza.startDate} Fine:${esperienza.endDate}`}
-                  </p>
-                </div>
+                )}
               </div>
-            ))}
+
+              {allExperience.map((esperienza) => (
+                <div key={esperienza._id} style={{ borderBottom: "1px solid grey" }} className="d-flex align-items-top gap-2 mb-4">
+                  <img className="me-2" style={{ width: "25px", height: "25px" }} src={esperienza?.image} alt="badge lavoro " />
+                  <div className="d-flex flex-column ">
+                    <h4 className="fw-semibold fs-5 m-0">{esperienza.role}</h4>
+                    <p style={{ fontSize: "13px" }} className="m-0">
+                      {esperienza.company}
+                    </p>
+                    <p style={{ fontSize: "13px" }} className="m-0 mb-3">
+                      {`Inizio: ${formatDate(esperienza.startDate)}   Fine: ${formatDate(esperienza.endDate)} -  ${
+                        getDateDifference(esperienza.startDate, esperienza.endDate).years
+                      } anni e ${getDateDifference(esperienza.startDate, esperienza.endDate).months} mesi`}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           {/* fine 4 sezione */}
 
