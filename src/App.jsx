@@ -4,6 +4,7 @@ import MyNavBar from "./components/MyNavBar";
 import MyHome from "./Pages/MyHome";
 import MyFooter from "./components/MyFooter";
 import Profile from "./Pages/Profile";
+import DetailsExperience from "./Pages/DetailsExperience";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MyHome />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/details/experience" element={<DetailsExperience />} />
       </Routes>
       <MyFooter />
     </BrowserRouter>
