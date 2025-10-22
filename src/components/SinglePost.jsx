@@ -20,7 +20,7 @@ const SinglePost = ({ post }) => {
   const repost = getRandomNumberUnder();
 
   return (
-    <Row className="bg-white rounded mt-3 p-3  border border-secondary ">
+    <Row className="bg-white rounded-2 mt-3 p-3 ">
       <Col xs={12} className="d-flex align-items-top">
         <Col xs={1} className="me-5 me-xl-3">
           <img className="rounded-circle" style={{ width: "60px", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />

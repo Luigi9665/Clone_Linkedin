@@ -25,7 +25,7 @@ const ColCenterHomePage = () => {
     <>
       <Container>
         {/* CREA UN POST HOME */}
-        <Row className="bg-white rounded mt-3 p-3  border border-secondary ">
+        <Row className="bg-white rounded-2 mt-3 p-3   ">
           <Col xs={12} className="d-flex align-items-center">
             <Col xs={1} className="me-2">
               <img className="rounded-circle " style={{ width: "100%" }} src={profileSelect.image} alt="img profilo" />
