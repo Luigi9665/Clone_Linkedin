@@ -216,3 +216,9 @@ body {
   width: 70%;
   position: absolute;
 }
+.linkLeftHome {
+  text-decoration: none;
+}
+.linkLeftHome:hover {
+  text-decoration: underline;
+}
