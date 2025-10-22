@@ -22,8 +22,8 @@ const SinglePost = ({ post }) => {
   return (
     <Row className="bg-white rounded mt-3 p-3  border border-secondary ">
       <Col xs={12} className="d-flex align-items-top">
-        <Col xs={1} className="me-3">
-          <img className="rounded-circle" style={{ width: "100%", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />
+        <Col xs={1} className="me-5 me-xl-3">
+          <img className="rounded-circle" style={{ width: "60px", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />
         </Col>
         <Col xs={8}>
           <h5 className="m-0">{title}</h5>
@@ -33,7 +33,7 @@ const SinglePost = ({ post }) => {
           </p>
         </Col>
 
-        <Col xs={3} className="d-flex align-items-baseline justify-content-end">
+        <Col xs={3} className="d-flex align-items-baseline justify-content-xl-end">
           <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
             <ThreeDots className="fs-5" />
           </div>
