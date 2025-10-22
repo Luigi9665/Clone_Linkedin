@@ -1,4 +1,4 @@
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { BookmarkFill, Calendar2Event, Newspaper, PeopleFill, PersonFillAdd } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ const ColLeftHomePage = () => {
       <div className="top-card-background-hero-image ">
         <img
           className="copertina"
-          style={{ width: "100%", height: "250px", objectFit: "cover" }}
+          style={{ width: "100%", height: "100px", objectFit: "cover" }}
           src="https://images.unsplash.com/photo-1587387119725-9d6bac0f22fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
           alt="copertina"
         />
@@ -20,7 +20,7 @@ const ColLeftHomePage = () => {
 
         <div className="profile d-flex justify-content-between align-items-end">
           <div className="">
-            <button className="rounded-circle border border-none bg-white ">
+            <button className="rounded-circle border border-none bg-white p-1">
               <img className="rounded-circle " style={{ width: "100px", objectFit: "cover" }} src={profileSelect.image} alt="img profilo" />
             </button>
           </div>
@@ -28,27 +28,29 @@ const ColLeftHomePage = () => {
       </div>
 
       <div className="bg-white rounded-bottom-2">
-        <Row className="px-2  ">
-          <Col>
-            <div className="d-flex flex-column flex-lg-row">
-              <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
-            </div>
+        <Container>
+          <Row className="px-2  ">
+            <Col>
+              <div className="d-flex flex-column flex-lg-row">
+                <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
+              </div>
 
-            <p>{`${profileSelect.title}`}</p>
-            <p style={{ color: "#666666" }}>
-              {`${profileSelect.area}`}{" "}
-              <a className="text-decoration-none fw-semibold" href="#">
-                {" "}
-                Informazioni di contatto{" "}
-              </a>
-            </p>
-          </Col>
-          <Col className="p-0">
-            <div className="d-flex justify-content-end gap-2 mt-1">
-              <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
-            </div>
-          </Col>
-        </Row>
+              <p>{`${profileSelect.title}`}</p>
+              <p style={{ color: "#666666" }}>
+                {`${profileSelect.area}`}{" "}
+                <a className="text-decoration-none fw-semibold" href="#">
+                  {" "}
+                  Informazioni di contatto{" "}
+                </a>
+              </p>
+            </Col>
+            <Col className="p-0">
+              <div className="d-flex justify-content-end gap-2 mt-1">
+                <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
       <div className="bg-white rounded-2 mt-3 p-3">
         <div>

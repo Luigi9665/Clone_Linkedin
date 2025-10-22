@@ -4,6 +4,7 @@ import MyNavBar from "./components/MyNavBar";
 import MyHome from "./Pages/MyHome";
 import MyFooter from "./components/MyFooter";
 import Profile from "./Pages/Profile";
+import ColCenterHomePage from "./components/ColCenterHomePage";
 import DetailsExperience from "./Pages/DetailsExperience";
 
 function App() {
