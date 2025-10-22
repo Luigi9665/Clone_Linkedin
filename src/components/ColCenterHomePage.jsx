@@ -29,7 +29,12 @@ const ColCenterHomePage = () => {
         <Row className="bg-white rounded-2 mt-3 p-3   ">
           <Col xs={12} className="d-flex align-items-center">
             <Col xs={1} className="me-2">
-              <img className="rounded-circle " style={{ width: "100%" }} src={profileSelect.image} alt="img profilo" />
+              <img
+                className="rounded-circle "
+                style={{ width: "100%" }}
+                src={profileSelect ? profileSelect.image : "https://roland.promakim.com.tr/images/resimbulunamadi.jpg"}
+                alt="img profilo"
+              />
             </Col>
             <Col xs={11}>
               <FormPost />

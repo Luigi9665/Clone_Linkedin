@@ -1,7 +1,7 @@
 import { Button, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteExperienceAction, loginAction } from "../redux/action";
+import { deleteExperienceAction, deleteProfileAction, loginAction } from "../redux/action";
 
 const MyDropDown = ({ visibleButtonTu }) => {
   // IMPORTARSI IL DISPATCH E L'AZIONE PER LA FETCH IN CASO DI ERRORE NEL LOG IN
@@ -12,6 +12,7 @@ const MyDropDown = ({ visibleButtonTu }) => {
 
   const setDrop = () => {
     dispatch(loginAction(""));
+    dispatch(deleteProfileAction());
     dispatch(deleteExperienceAction());
     visibleButtonTu();
   };

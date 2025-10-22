@@ -10,7 +10,11 @@ const ColLeftHomePage = () => {
         <img
           className="copertina"
           style={{ width: "100%", height: "100px", objectFit: "cover" }}
-          src="https://images.unsplash.com/photo-1587387119725-9d6bac0f22fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+          src={
+            profileSelect
+              ? "https://images.unsplash.com/photo-1587387119725-9d6bac0f22fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+              : "https://roland.promakim.com.tr/images/resimbulunamadi.jpg"
+          }
           alt="copertina"
         />
       </div>
@@ -21,7 +25,12 @@ const ColLeftHomePage = () => {
         <div className="profile d-flex justify-content-between align-items-end">
           <div className="">
             <button className="rounded-circle border border-none bg-white p-1">
-              <img className="rounded-circle " style={{ width: "100px", objectFit: "cover" }} src={profileSelect.image} alt="img profilo" />
+              <img
+                className="rounded-circle "
+                style={{ width: "100px", objectFit: "cover" }}
+                src={profileSelect ? profileSelect.image : "https://roland.promakim.com.tr/images/resimbulunamadi.jpg"}
+                alt="img profilo"
+              />
             </button>
           </div>
         </div>
@@ -32,12 +41,12 @@ const ColLeftHomePage = () => {
           <Row className="px-2  ">
             <Col>
               <div className="d-flex flex-column flex-lg-row ">
-                <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
+                <h1 className="fs-3 me-2">{profileSelect ? `${profileSelect.name} ${profileSelect.surname}` : "Non disponibile!"}</h1>
               </div>
 
-              <p>{`${profileSelect.title}`}</p>
+              <p>{profileSelect ? `${profileSelect.title}` : "Non disponibile!"}</p>
               <p className="text-truncate" style={{ color: "#666666" }}>
-                {`${profileSelect.area}`}{" "}
+                {profileSelect ? `${profileSelect.area}` : "Non disponibile!"}{" "}
                 <a className="text-decoration-none fw-semibold" href="#">
                   {" "}
                   Informazioni di contatto{" "}
@@ -46,7 +55,7 @@ const ColLeftHomePage = () => {
             </Col>
             <Col className="p-0">
               <div className="d-flex justify-content-end gap-2 mt-1">
-                <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
+                <p className="fw-semibold ">{profileSelect ? `${profileSelect.bio}` : "Non disponibile!"}</p>
               </div>
             </Col>
           </Row>

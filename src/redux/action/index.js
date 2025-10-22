@@ -1,6 +1,7 @@
 export const ADD_PROFILE = "ADD_PROFILE";
 export const LOG_IN = "LOG_IN";
 export const DELETE_ESPERIENZE = "DELETE_ESPERIENZE";
+export const DELETE_PROFILE = "DELETE_PROFILE";
 export const GET_ESPERIENZE = "GET_ESPERIENZE";
 export const ADD_POST = "ADD_POST";
 // IMPORT DELLA CHIAVE PER LE FETCH
@@ -10,6 +11,7 @@ const key = import.meta.env.VITE_TOKEN_API;
 export const loginAction = (user) => ({ type: LOG_IN, payload: user });
 
 export const deleteExperienceAction = () => ({ type: DELETE_ESPERIENZE });
+export const deleteProfileAction = () => ({ type: DELETE_PROFILE });
 
 // FETCH PER IL PROFILO SELEZIONATO
 export const addProfileAction = (indiceRicerca) => {
