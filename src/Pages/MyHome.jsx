@@ -6,7 +6,7 @@ const MyHome = () => {
   return (
     <Container>
       <Row>
-        <ColLeftHomePage />;
+        <ColLeftHomePage />
         <ColRightHomePage />
       </Row>
     </Container>

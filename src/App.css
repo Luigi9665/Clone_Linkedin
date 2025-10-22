@@ -228,3 +228,17 @@ body {
     width: 70%;
   }
 }
+
+.linkColRightHomePage:hover {
+  background-color: #ebebeb;
+  cursor: pointer;
+}
+
+.linkFooterHomePage {
+  text-decoration: none;
+  color: #000;
+}
+.linkFooterHomePage:hover {
+  text-decoration: underline;
+  color: #0a58ca;
+}
