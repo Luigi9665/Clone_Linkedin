@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
 // import { useParams } from "react-router";
 import { getEsperienzeAction } from "../redux/action";
 
-const ModalAddExperience = ({ idProfile, callSetModalExperience }) => {
+const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience }) => {
   const [formData, setFormData] = useState({
     role: "",
     company: "",
@@ -15,7 +15,14 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience }) => {
     area: "",
   });
 
-  const url = `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences`;
+  console.log("idExperience", idExperience);
+
+  const url = idExperience
+    ? `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences/${idExperience}`
+    : `https://striveschool-api.herokuapp.com/api/profile/${idProfile}/experiences`;
+
+  const method = idExperience ? "PUT" : "POST";
+
   const key = import.meta.env.VITE_TOKEN_API;
 
   const dispatch = useDispatch();
@@ -36,7 +43,7 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience }) => {
 
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method,
         headers: {
           "Content-Type": "application/json",
           Authorization: key,
@@ -65,6 +72,44 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience }) => {
       setMessage({ type: "danger", text: err.message });
     }
   };
+
+  const getSingleExperience = async () => {
+    try {
+      let response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        const singleEsperienza = await response.json();
+        setFormData({
+          role: singleEsperienza.role,
+          company: singleEsperienza.company,
+          startDate: singleEsperienza.startDate,
+          endDate: singleEsperienza.endDate,
+          description: singleEsperienza.description,
+          area: singleEsperienza.area,
+        });
+      } else if (response.status === 401 || response.status === 403) {
+        throw new Error("Autorizzazione fallita, controlla la tua API key.");
+      } else if (response.status === 404) {
+        throw new Error("Risorsa non trovata (404). Riprova con la ricerca.");
+      } else if (response.status >= 500) {
+        throw new Error("Errore del server, riprova più tardi.");
+      } else {
+        throw new Error("Errore nella richiesta: " + response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (idExperience) {
+      getSingleExperience();
+    }
+  }, [idExperience]);
 
   return (
     <div className="overlay">
@@ -117,8 +162,8 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience }) => {
             </Form.Group>
 
             <div className="d-flex align-items-center justify-content-center gap-3">
-              <Button variant="primary" type="submit" className="w-50">
-                Salva profilo
+              <Button variant={`${idExperience ? "warning" : "primary"}`} type="submit" className="w-50">
+                {idExperience ? "Modifica Esperienza" : "Salva Esperienza"}
               </Button>
               <Button variant="danger" type="button" className="w-50" onClick={callSetModalExperience}>
                 Annulla
