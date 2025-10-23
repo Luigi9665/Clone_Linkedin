@@ -16,7 +16,7 @@ const ColCenterHomePage = () => {
             <Col xs={1} className="me-2">
               <img
                 className="rounded-circle "
-                style={{ width: "100%" }}
+                style={{ width: "60px", height: "60px", objectFit: "cover" }}
                 src={profileSelect ? profileSelect.image : "https://roland.promakim.com.tr/images/resimbulunamadi.jpg"}
                 alt="img profilo"
               />

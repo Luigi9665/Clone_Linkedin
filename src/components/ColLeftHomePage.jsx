@@ -27,7 +27,7 @@ const ColLeftHomePage = () => {
             <button className="rounded-circle border border-none bg-white p-1">
               <img
                 className="rounded-circle "
-                style={{ width: "75px", objectFit: "cover" }}
+                style={{ width: "60px", height: "60px", objectFit: "cover" }}
                 src={profileSelect ? profileSelect.image : "https://roland.promakim.com.tr/images/resimbulunamadi.jpg"}
                 alt="img profilo"
               />
