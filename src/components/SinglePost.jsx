@@ -1,12 +1,27 @@
 import { Col, Row } from "react-bootstrap";
-import { ArrowRepeat, ChatText, Dot, GlobeEuropeAfrica, HandThumbsUp, HandThumbsUpFill, Pencil, SendArrowUpFill, ThreeDots, XLg } from "react-bootstrap-icons";
+import {
+  ArrowRepeat,
+  ChatText,
+  Dot,
+  GlobeEuropeAfrica,
+  HandThumbsUp,
+  HandThumbsUpFill,
+  Pencil,
+  SendArrowUpFill,
+  ThreeDots,
+  TrashFill,
+  XLg,
+} from "react-bootstrap-icons";
 import { timeSince } from "../scriptDate/script";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import ModalForPost from "./ModalForPost";
+import ModalDeletePost from "./ModalDeletePost";
 
 const SinglePost = ({ post }) => {
   const [viewModal, setModal] = useState(false);
+
+  const [viewDelete, setDelete] = useState(false);
 
   const getRandomNumberOver = () => {
     return Math.floor(Math.random() * 10001);
@@ -29,14 +44,21 @@ const SinglePost = ({ post }) => {
   const setViewModal = () => {
     setModal(!viewModal);
   };
+  const setViewDelete = () => {
+    setDelete(!viewDelete);
+  };
 
   const hasModal = () => {
     return <ModalForPost idPost={post._id} setViewModal={setViewModal} />;
+  };
+  const hasModalDelete = () => {
+    return <ModalDeletePost idPost={post._id} setViewModal={setViewDelete} />;
   };
 
   return (
     <Row className="bg-white rounded-2 mt-3 p-3 ">
       {viewModal && hasModal()}
+      {viewDelete && hasModalDelete()}
       <Col xs={12} className="d-flex align-items-start">
         <Col xs={1} className="me-5 me-xl-3">
           <img className="rounded-circle" style={{ width: "60px", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />
@@ -50,17 +72,24 @@ const SinglePost = ({ post }) => {
         </Col>
 
         <Col xs={3} className="d-flex align-items-baseline justify-content-xl-end">
-          {hasMyPost && (
+          {hasMyPost ? (
             <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2" onClick={setViewModal}>
               <Pencil className="fs-5" />
             </div>
+          ) : (
+            <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
+              <ThreeDots className="fs-5" />
+            </div>
           )}
-          <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
-            <ThreeDots className="fs-5" />
-          </div>
-          <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
-            <XLg className="fs-5" />
-          </div>
+          {hasMyPost ? (
+            <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2" onClick={setViewDelete}>
+              <TrashFill className="fs-5" />
+            </div>
+          ) : (
+            <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
+              <XLg className="fs-5" />
+            </div>
+          )}
         </Col>
       </Col>
       {/* <div>
