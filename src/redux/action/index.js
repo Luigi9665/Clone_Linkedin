@@ -1,5 +1,6 @@
 export const ADD_PROFILE = "ADD_PROFILE";
 export const LOG_IN = "LOG_IN";
+export const LOG_OUT = "LOG_OUT";
 export const DELETE_ESPERIENZE = "DELETE_ESPERIENZE";
 export const DELETE_PROFILE = "DELETE_PROFILE";
 export const GET_ESPERIENZE = "GET_ESPERIENZE";
@@ -9,6 +10,7 @@ const key = import.meta.env.VITE_TOKEN_API;
 
 // FUNIONI PER RICHIAMARE LE AZIONI DEI REDUCERS
 export const loginAction = (user) => ({ type: LOG_IN, payload: user });
+export const logOutAction = () => ({ type: LOG_OUT });
 
 export const deleteExperienceAction = () => ({ type: DELETE_ESPERIENZE });
 export const deleteProfileAction = () => ({ type: DELETE_PROFILE });
