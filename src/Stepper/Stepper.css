@@ -45,6 +45,7 @@
 .step-default {
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-block: 1rem;
 }
 
 .footer-container {
@@ -70,13 +71,14 @@
   transition: all 350ms;
   border-radius: 0.25rem;
   padding: 0.25rem 0.5rem;
-  background-color: #ffdf7e;
-  color: #000000;
+  background-color: #555f6a;
+  color: white;
   cursor: pointer;
+  border: 2px solid #444a53;
 }
 
 .back-button:hover {
-  color: #52525b;
+  color: #3d4449;
 }
 
 .back-button.inactive {
@@ -91,20 +93,21 @@
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background-color: white;
-  color: #000000;
+  background-color: #ffa230;
+  color: white;
   font-weight: 500;
   letter-spacing: -0.025em;
   padding: 0.375rem 0.875rem;
   cursor: pointer;
+  border: 2px solid #cc7a00;
 }
 
 .next-button:hover {
-  background-color: #84e085;
+  background-color: #cc7a00;
 }
 
 .next-button:active {
-  background-color: #84e085;
+  background-color: #cc7a00;
 }
 
 .step-indicator {

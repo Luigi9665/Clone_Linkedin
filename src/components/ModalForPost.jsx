@@ -108,7 +108,12 @@ const ModalForPost = ({ idPost, setViewModal }) => {
         </Step>
         <Step>
           <h2>Inserisci il nuovo testo del post:</h2>
-          <input value={post.text} onChange={(e) => setPost(e.target.value)} placeholder="Nuovo testo" className="form-control rounded-pill border-0" />
+          <input
+            value={post.text}
+            onChange={(e) => setPost({ ...post, text: e.target.value })}
+            placeholder="Nuovo testo"
+            className="form-control rounded-pill border-0"
+          />
         </Step>
         <Step>
           <h2>Vuoi salvare il nuovo post?</h2>

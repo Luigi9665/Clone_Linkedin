@@ -209,7 +209,7 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
 
 function StepConnector({ isComplete }) {
   const lineVariants = {
-    incomplete: { width: 0, backgroundColor: "transparent" },
+    incomplete: { width: 0, backgroundColor: "rgba(0,0,0,0)" },
     complete: { width: "100%", backgroundColor: "#5227FF" },
   };
 
