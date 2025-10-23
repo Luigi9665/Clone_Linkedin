@@ -24,7 +24,7 @@ const SinglePost = ({ post }) => {
   const dateToCreate = timeSince(post.createdAt);
   const like = getRandomNumberOver();
   const repost = getRandomNumberUnder();
-  const hasMyPost = post.user._id === profileSelect._id;
+  const hasMyPost = post.user._id === profileSelect?._id;
 
   const setViewModal = () => {
     setModal(!viewModal);

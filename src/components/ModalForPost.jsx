@@ -20,7 +20,7 @@ const ModalForPost = ({ idPost, setViewModal }) => {
   const getModPost = async () => {
     try {
       const response = await fetch(url, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: key,
