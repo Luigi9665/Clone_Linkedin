@@ -48,7 +48,7 @@ const FormPost = () => {
           onChange={(e) => setText(e.target.value)}
           type="text"
           className="form-control rounded-pill border-0"
-          placeholder="Cerca"
+          placeholder="Scrivi un nuovo post..."
           aria-label="Example text with button addon"
           aria-describedby="button-addon1"
         />
