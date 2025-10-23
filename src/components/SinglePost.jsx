@@ -1,6 +1,7 @@
 import { Col, Row } from "react-bootstrap";
-import { ArrowRepeat, ChatText, Dot, GlobeEuropeAfrica, HandThumbsUp, HandThumbsUpFill, SendArrowUpFill, ThreeDots, XLg } from "react-bootstrap-icons";
+import { ArrowRepeat, ChatText, Dot, GlobeEuropeAfrica, HandThumbsUp, HandThumbsUpFill, Pencil, SendArrowUpFill, ThreeDots, XLg } from "react-bootstrap-icons";
 import { timeSince } from "../scriptDate/script";
+import { useSelector } from "react-redux";
 
 const SinglePost = ({ post }) => {
   const getRandomNumberOver = () => {
@@ -10,6 +11,7 @@ const SinglePost = ({ post }) => {
   const getRandomNumberUnder = () => {
     return Math.floor(Math.random() * 1001);
   };
+  const profileSelect = useSelector((state) => state.profileSelect.content);
 
   const image = post.user.image;
   const title = post.user.name + " " + post.user.surname;
@@ -18,10 +20,11 @@ const SinglePost = ({ post }) => {
   const dateToCreate = timeSince(post.createdAt);
   const like = getRandomNumberOver();
   const repost = getRandomNumberUnder();
+  const hasMyPost = post.user._id === profileSelect._id;
 
   return (
     <Row className="bg-white rounded-2 mt-3 p-3 ">
-      <Col xs={12} className="d-flex align-items-top">
+      <Col xs={12} className="d-flex align-items-start">
         <Col xs={1} className="me-5 me-xl-3">
           <img className="rounded-circle" style={{ width: "60px", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />
         </Col>
@@ -34,6 +37,11 @@ const SinglePost = ({ post }) => {
         </Col>
 
         <Col xs={3} className="d-flex align-items-baseline justify-content-xl-end">
+          {hasMyPost && (
+            <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
+              <Pencil className="fs-5" />
+            </div>
+          )}
           <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
             <ThreeDots className="fs-5" />
           </div>

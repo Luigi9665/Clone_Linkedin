@@ -1,20 +1,5 @@
-import { Button, CloseButton, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
-import {
-  ArrowRepeat,
-  ChatText,
-  Dot,
-  FileTextFill,
-  GlobeEuropeAfrica,
-  HandThumbsUp,
-  HandThumbsUpFill,
-  Image,
-  PlayBtnFill,
-  PlusLg,
-  SendArrowUpFill,
-  ThreeDots,
-  X,
-  XLg,
-} from "react-bootstrap-icons";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import { FileTextFill, Image, PlayBtnFill } from "react-bootstrap-icons";
 import { useSelector } from "react-redux";
 import ListPostHome from "./ListPostHome";
 import FormPost from "./FormPost";
