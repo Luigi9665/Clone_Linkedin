@@ -61,9 +61,9 @@ const ModalAddExperience = ({ idProfile, callSetModalExperience, idExperience })
           description: "",
           area: "",
         });
+        dispatch(getEsperienzeAction(idProfile));
         setTimeout(() => {
           callSetModalExperience();
-          dispatch(getEsperienzeAction(idProfile));
         }, 1500);
       }
     } catch (err) {

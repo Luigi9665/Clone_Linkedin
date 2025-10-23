@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { addProfileAction } from "../redux/action";
+import { addProfileAction, addProfileVisualAction } from "../redux/action";
 
 const ModalEditProfile = ({ callSetModalProfile }) => {
   const myProfile = useSelector((state) => state.profileSelect.content);
@@ -33,6 +33,27 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
     }));
   };
 
+  const getImage = async (e) => {
+    const newUrl = ` https://striveschool-api.herokuapp.com/api/profile/${id}/picture`;
+    const fileInput = e.target.elements.imageProfile;
+    if (fileInput && fileInput.files.length > 0) {
+      const formDataImage = new FormData();
+      formDataImage.append("profile", fileInput.files[0]);
+
+      const uploadImage = await fetch(newUrl, {
+        method: "POST",
+        headers: {
+          Authorization: key,
+        },
+        body: formDataImage,
+      });
+
+      if (!uploadImage.ok) {
+        throw new Error("Errore durante il caricamento dell'immagine.");
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,6 +70,8 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
       if (!response.ok) {
         throw new Error("Errore durante l'invio");
       } else {
+        await getImage(e);
+
         setMessage({ type: "success", text: "Profilo aggiornato con successo!" });
         setFormData({
           name: "",
@@ -59,9 +82,10 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
           bio: "",
           area: "",
         });
+        dispatch(addProfileVisualAction(id));
+        dispatch(addProfileAction(id));
         setTimeout(() => {
           callSetModalProfile();
-          dispatch(addProfileAction(id));
         }, 2000);
       }
     } catch (err) {
@@ -82,7 +106,7 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
               {message.text}
             </Alert>
           )}
-          <Form onSubmit={handleSubmit}>
+          <Form encType="multipart/form-data" onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Nome</Form.Label>
               <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Inserisci il tuo nome" required />
@@ -127,7 +151,7 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
 
             <Form.Group className="mb-3">
               <Form.Label>Inserisci la tua immagine</Form.Label>
-              <Form.Control type="input" name="Image" placeholder="Inserisci la tua immagine" />
+              <Form.Control type="file" name="imageProfile" accept="image" placeholder="Inserisci la tua immagine" />
             </Form.Group>
 
             <div className="d-flex align-items-center justify-content-center gap-3">

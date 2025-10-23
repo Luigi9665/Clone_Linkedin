@@ -28,9 +28,9 @@ const ModalDeletePost = ({ idPost, setViewModal }) => {
       } else {
         setMessage({ type: "success", text: "Post eliminato con successo!" });
 
+        dispatch(getPostAction());
         setTimeout(() => {
           setViewModal();
-          dispatch(getPostAction());
         }, 1500);
       }
     } catch (err) {

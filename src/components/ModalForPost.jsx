@@ -35,9 +35,9 @@ const ModalForPost = ({ idPost, setViewModal }) => {
         setPost({
           text: "",
         });
+        dispatch(getPostAction());
         setTimeout(() => {
           setViewModal();
-          dispatch(getPostAction());
         }, 1500);
       }
     } catch (err) {
