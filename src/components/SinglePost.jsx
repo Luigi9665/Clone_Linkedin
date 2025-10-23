@@ -2,8 +2,12 @@ import { Col, Row } from "react-bootstrap";
 import { ArrowRepeat, ChatText, Dot, GlobeEuropeAfrica, HandThumbsUp, HandThumbsUpFill, Pencil, SendArrowUpFill, ThreeDots, XLg } from "react-bootstrap-icons";
 import { timeSince } from "../scriptDate/script";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import ModalForPost from "./ModalForPost";
 
 const SinglePost = ({ post }) => {
+  const [viewModal, setModal] = useState(false);
+
   const getRandomNumberOver = () => {
     return Math.floor(Math.random() * 10001);
   };
@@ -22,8 +26,17 @@ const SinglePost = ({ post }) => {
   const repost = getRandomNumberUnder();
   const hasMyPost = post.user._id === profileSelect._id;
 
+  const setViewModal = () => {
+    setModal(!viewModal);
+  };
+
+  const hasModal = () => {
+    return <ModalForPost idPost={post._id} setViewModal={setViewModal} />;
+  };
+
   return (
     <Row className="bg-white rounded-2 mt-3 p-3 ">
+      {viewModal && hasModal()}
       <Col xs={12} className="d-flex align-items-start">
         <Col xs={1} className="me-5 me-xl-3">
           <img className="rounded-circle" style={{ width: "60px", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />
@@ -38,7 +51,7 @@ const SinglePost = ({ post }) => {
 
         <Col xs={3} className="d-flex align-items-baseline justify-content-xl-end">
           {hasMyPost && (
-            <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2">
+            <div style={{ cursor: "pointer" }} className="toAdd rounded-circle d-flex align-items-center p-2" onClick={setViewModal}>
               <Pencil className="fs-5" />
             </div>
           )}
