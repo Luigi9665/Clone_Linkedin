@@ -62,7 +62,8 @@ const ModalDeletePost = ({ idPost, setViewModal }) => {
         }}
         onFinalStepCompleted={getDeletePost}
         // backButtonText="Previous"
-        nextButtonText="Elimina"
+        finalStepButtonText="Elimina"
+        classNameButtonNext="next-buttonDelete"
       >
         <Step>
           <h2>Vuoi eliminare il post?</h2>

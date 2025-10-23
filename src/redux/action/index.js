@@ -1,4 +1,5 @@
 export const ADD_PROFILE = "ADD_PROFILE";
+export const ADD_PROFILE_VISUAL = "ADD_PROFILE_VISUAL";
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 export const DELETE_ESPERIENZE = "DELETE_ESPERIENZE";
@@ -15,7 +16,7 @@ export const logOutAction = () => ({ type: LOG_OUT });
 export const deleteExperienceAction = () => ({ type: DELETE_ESPERIENZE });
 export const deleteProfileAction = () => ({ type: DELETE_PROFILE });
 
-// FETCH PER IL PROFILO SELEZIONATO
+// FETCH PER IL MIO PROFILO
 export const addProfileAction = (indiceRicerca) => {
   const url = `https://striveschool-api.herokuapp.com/api/profile/${indiceRicerca}`;
   return async (dispatch, getState) => {
@@ -60,6 +61,37 @@ export const getEsperienzeAction = (indiceRicerca) => {
       if (response.ok) {
         const dataEsperienze = await response.json();
         dispatch({ type: GET_ESPERIENZE, payload: dataEsperienze });
+      } else if (response.status === 401 || response.status === 403) {
+        throw new Error("Autorizzazione fallita, controlla la tua API key.");
+      } else if (response.status === 404) {
+        throw new Error("Risorsa non trovata (404). Riprova con la ricerca.");
+      } else if (response.status >= 500) {
+        throw new Error("Errore del server, riprova più tardi.");
+      } else {
+        throw new Error("Errore nella richiesta: " + response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// FETCH PER IL PROFILO SELEZIONATO
+export const addProfileVisualAction = (indiceRicerca) => {
+  const url = `https://striveschool-api.herokuapp.com/api/profile/${indiceRicerca}`;
+  return async (dispatch, getState) => {
+    console.log(getState);
+    try {
+      let response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        const dataObj = await response.json();
+        dispatch({ type: ADD_PROFILE_VISUAL, payload: dataObj });
+        dispatch(getEsperienzeAction(dataObj._id));
       } else if (response.status === 401 || response.status === 403) {
         throw new Error("Autorizzazione fallita, controlla la tua API key.");
       } else if (response.status === 404) {

@@ -19,6 +19,8 @@ export default function Stepper({
   nextButtonText = "Continue",
   disableStepIndicators = false,
   renderStepIndicator,
+  finalStepButtonText = "Salva",
+  classNameButtonNext = "next-button",
   ...rest
 }) {
   const [currentStep, setCurrentStep] = useState(initialStep);
@@ -103,8 +105,8 @@ export default function Stepper({
                   {backButtonText}
                 </button>
               )}
-              <button onClick={isLastStep ? handleComplete : handleNext} className="next-button" {...nextButtonProps}>
-                {isLastStep ? "Salva" : nextButtonText}
+              <button onClick={isLastStep ? handleComplete : handleNext} className={classNameButtonNext} {...nextButtonProps}>
+                {isLastStep ? finalStepButtonText : nextButtonText}
               </button>
             </div>
           </div>

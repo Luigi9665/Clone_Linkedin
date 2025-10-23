@@ -125,6 +125,11 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
               <Form.Control type="text" name="area" value={formData.area} onChange={handleChange} placeholder="Es. Milano, Italia" />
             </Form.Group>
 
+            <Form.Group className="mb-3">
+              <Form.Label>Inserisci la tua immagine</Form.Label>
+              <Form.Control type="input" name="Image" placeholder="Inserisci la tua immagine" />
+            </Form.Group>
+
             <div className="d-flex align-items-center justify-content-center gap-3">
               <Button variant="primary" type="submit" className="w-50">
                 Salva profilo

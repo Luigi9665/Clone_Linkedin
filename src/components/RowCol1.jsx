@@ -23,6 +23,7 @@ const RowCol1 = ({ profileSelect }) => {
   const { id } = useParams();
 
   const allExperience = useSelector((state) => state.profileSelect.esperienze);
+  const profileVisual = useSelector((state) => state.profileSelect.profileToVisualize);
   // console.log(id);
 
   // FUNZIONE PER FORMATTARE LA DATA
@@ -35,12 +36,9 @@ const RowCol1 = ({ profileSelect }) => {
 
   function getDateDifference(startDate, endDate) {
     const start = new Date(startDate);
-
     const end = new Date(endDate);
-
     let years = end.getFullYear() - start.getFullYear();
     let months = end.getMonth() - start.getMonth();
-
     return { years, months };
   }
 
@@ -67,10 +65,15 @@ const RowCol1 = ({ profileSelect }) => {
               <div className="profile d-flex justify-content-between align-items-end">
                 <div className="">
                   <button className="rounded-circle border border-none bg-white p-1">
-                    <img className="rounded-circle " style={{ width: "100px", objectFit: "cover" }} src={profileSelect.image} alt="img profilo" />
+                    <img
+                      className="rounded-circle "
+                      style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                      src={profileVisual.image}
+                      alt="img profilo"
+                    />
                   </button>
                 </div>
-                {id === "me" && (
+                {id === profileSelect?._id && (
                   <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalProfile}>
                     <Pencil className="fs-3" />
                   </div>
@@ -83,7 +86,7 @@ const RowCol1 = ({ profileSelect }) => {
                   <Row className="px-2  ">
                     <Col>
                       <div className="d-flex flex-column flex-lg-row">
-                        <h1 className="fs-3 me-2">{`${profileSelect.name} ${profileSelect.surname}`}</h1>
+                        <h1 className="fs-3 me-2">{`${profileVisual.name} ${profileVisual.surname}`}</h1>
                         <div className="d-flex align-items-center verifica rounded-pill  text-center px-2 py-1 ">
                           <ShieldCheck />
                           <a style={{ minInlineSize: "max-content" }} className="text-decoration-none fw-semibold" href="#">
@@ -93,9 +96,9 @@ const RowCol1 = ({ profileSelect }) => {
                         </div>
                       </div>
 
-                      <p>{`${profileSelect.title}`}</p>
+                      <p>{`${profileVisual.title}`}</p>
                       <p style={{ color: "#666666" }}>
-                        {`${profileSelect.area}`}{" "}
+                        {`${profileVisual.area}`}{" "}
                         <a className="text-decoration-none fw-semibold" href="#">
                           {" "}
                           Informazioni di contatto{" "}
@@ -109,7 +112,7 @@ const RowCol1 = ({ profileSelect }) => {
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/877px-McDonald%27s_Golden_Arches.svg.png"
                         alt="badge lavoro "
                       /> */}
-                        <p className="fw-semibold ">{`${profileSelect.bio}`}</p>
+                        <p className="fw-semibold ">{`${profileVisual.bio}`}</p>
                       </div>
                     </Col>
                   </Row>
@@ -228,7 +231,7 @@ const RowCol1 = ({ profileSelect }) => {
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <h2 className="fs-4 pt-3">Esperienza</h2>
 
-                {id === "me" && (
+                {id === profileSelect?._id && (
                   <div className="d-flex align-items-center gap3">
                     <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalExperience}>
                       <PlusLg className="fs-3" />

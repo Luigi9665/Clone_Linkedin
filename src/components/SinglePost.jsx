@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import ModalForPost from "./ModalForPost";
 import ModalDeletePost from "./ModalDeletePost";
+import { Link } from "react-router";
 
 const SinglePost = ({ post }) => {
   const [viewModal, setModal] = useState(false);
@@ -60,7 +61,7 @@ const SinglePost = ({ post }) => {
       {viewModal && hasModal()}
       {viewDelete && hasModalDelete()}
       <Col xs={12} className="d-flex align-items-start">
-        <Col xs={1} className="me-5 me-xl-3">
+        <Col as={Link} to={`/profile/${post.user._id}`} xs={1} className="me-5 me-xl-3">
           <img className="rounded-circle" style={{ width: "60px", height: "60px", objectFit: "cover" }} src={image} alt="img profilo" />
         </Col>
         <Col xs={8}>
