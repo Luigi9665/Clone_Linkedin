@@ -26,7 +26,7 @@ const MyDropDown = ({ visibleButtonTu }) => {
           // src="https://static.vecteezy.com/system/resources/previews/051/270/245/non_2x/cartoon-people-avatar-minimalist-human-avatar-versatile-icon-for-online-projects-an-avatar-for-the-profile-picture-of-someone-vector.jpg"
           src={profileState.image}
           alt="immagine profilo"
-          style={{ width: "40px", borderRadius: "50%" }}
+          style={{ width: "40px", height: "40px", objectFit: "cover", borderRadius: "50%" }}
         />
         <div style={{ paddingInline: "10px" }}>
           <p style={{ inlineSize: "max-content", fontSize: "14px", fontWeight: "500" }} className="m-0">
@@ -38,7 +38,7 @@ const MyDropDown = ({ visibleButtonTu }) => {
         </div>
       </div>
       <div className="d-flex gap-2 px-2 mt-2">
-        <Link to={`/profile/${profileState?._id}`} onClick={visibleButtonTu}>
+        <Link to={`/profile/${profileState._id}`} onClick={visibleButtonTu}>
           <Button className="rounded-5 px-4" style={{ lineHeight: "15px" }} size="sm" variant="outline-primary">
             Visualizza
             <br />
