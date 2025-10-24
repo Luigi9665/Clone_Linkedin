@@ -15,7 +15,7 @@ const SingleComment = ({ idPost, comment, allProfile }) => {
 
   const myProfile = useSelector((state) => state.profileSelect.content);
 
-  const hasMyPost = profileSelect?._id === myProfile._id;
+  const hasMyPost = profileSelect?._id === myProfile?._id;
 
   const url = `https://striveschool-api.herokuapp.com/api/comments/${comment._id}`;
   const key = import.meta.env.VITE_TOKEN_COMMENTS;

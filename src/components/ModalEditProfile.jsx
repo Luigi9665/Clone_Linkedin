@@ -3,7 +3,7 @@ import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { XCircleFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { addProfileAction, addProfileVisualAction } from "../redux/action";
+import { addAllProfileAction, addProfileAction, addProfileVisualAction } from "../redux/action";
 
 const ModalEditProfile = ({ callSetModalProfile }) => {
   const myProfile = useSelector((state) => state.profileSelect.content);
@@ -84,6 +84,7 @@ const ModalEditProfile = ({ callSetModalProfile }) => {
         });
         dispatch(addProfileVisualAction(id));
         dispatch(addProfileAction(id));
+        dispatch(addAllProfileAction());
         setTimeout(() => {
           callSetModalProfile();
         }, 2000);
