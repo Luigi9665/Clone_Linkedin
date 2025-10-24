@@ -1,11 +1,27 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import { ArrowRight, BarChartLineFill, Check2, EyeFill, PeopleFill, ShieldCheck, Pencil, PlusLg } from "react-bootstrap-icons";
+import { Button, Col, Container, Dropdown, Row } from "react-bootstrap";
+import {
+  ArrowRight,
+  BarChartLineFill,
+  Check2,
+  EyeFill,
+  PeopleFill,
+  ShieldCheck,
+  Pencil,
+  PlusLg,
+  Arrow90degRight,
+  InfoSquareFill,
+  BookmarkFill,
+  Download,
+  Newspaper,
+  CameraFill,
+} from "react-bootstrap-icons";
 import imgProfile from "../assets/imgSection2Profile.svg";
 import { Link, useParams } from "react-router";
 import { useState } from "react";
 import ModalEditProfile from "./ModalEditProfile";
 import { useSelector } from "react-redux";
 import ModalAddExperience from "./ModalAddExperience";
+import Carousel from "../Carousel/Carousel";
 
 const RowCol1 = ({ profileSelect }) => {
   const [viewModalProfile, setModalProfile] = useState(false);
@@ -50,20 +66,30 @@ const RowCol1 = ({ profileSelect }) => {
         <Col>
           {/* inizio  prima sezione */}
           <div>
-            <div className="top-card-background-hero-image ">
-              <img
-                className="copertina"
-                style={{ width: "100%", height: "250px", objectFit: "cover" }}
-                src="https://images.unsplash.com/photo-1587387119725-9d6bac0f22fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
-                alt="copertina"
-              />
+            <div style={{ position: "relative" }} className="top-card-background-hero-image ">
+              <div className="d-flex align-items-center ">
+                <button
+                  className=" bg-white rounded-circle border border-none "
+                  style={{ position: "absolute", zIndex: "4", top: "16px", right: "17px", width: "40px", height: "40px" }}
+                >
+                  {" "}
+                  <CameraFill className="text-primary fs-5   " />{" "}
+                </button>
+
+                <img
+                  className="copertina"
+                  style={{ width: "100%", height: "250px", objectFit: "cover" }}
+                  src="https://images.unsplash.com/photo-1587387119725-9d6bac0f22fb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170"
+                  alt="copertina"
+                />
+              </div>
             </div>
 
-            <div className="bg-white rounded-bottom-2 px-3">
+            <div className="bg-white rounded-bottom-2 px-3 pb-3">
               {/* inizio  immagine profilo */}
 
               <div className="profile d-flex justify-content-between align-items-end">
-                <div className="">
+                <div style={{ position: "relative" }}>
                   <button className="rounded-circle border border-none bg-white p-1">
                     <img
                       className="rounded-circle "
@@ -119,43 +145,15 @@ const RowCol1 = ({ profileSelect }) => {
                 </Container>
               </div>
               {/* inizio bottoni  */}
-              <div className=" align-items-top d-flex pb-3 bg-white rounded-bottom-2  ">
-                <Button className=" rounded-pill mx-1  " variant="primary">
+              <div style={{ flexWrap: "wrap" }} className=" align-items-top d-flex pb-3 bg-white rounded-bottom-2 gap-2  ">
+                <Button className=" rounded-pill mx-1 fw-semibold  " variant="primary">
                   Disponibile per
                 </Button>
-                <button className=" button-trasparenteBlu rounded-pill mx-1">Aggiungi sezione del profilo</button>
-                <button className=" button-trasparenteBlu rounded-pill mx-1 ">Migliora profilo</button>
-                {/* <Dropdown>
-                    <Dropdown.Toggle id="dropdown-basic">
-                      <button className="button-trasparenteNero rounded-pill ">risorse</button>
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-1">
-                        {" "}
-                        <Arrow90degRight className="me-2" /> Invia il profilo in un messaggio
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">
-                        {" "}
-                        <Download className="me-2" /> Salva come PDF
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">
-                        {" "}
-                        <BookmarkFill className="me-2" />
-                        Elementi salvati
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">
-                        {" "}
-                        <Newspaper className="me-2" />
-                        Attività
-                      </Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">
-                        {" "}
-                        <InfoSquareFill className="me-2" /> Informazioni
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown> */}
+                <button className=" button-trasparenteBlu rounded-pill mx-1  fw-semibold ">Aggiungi sezione del profilo</button>
+                <button className=" button-trasparenteBlu rounded-pill mx-1  fw-semibold  ">Migliora profilo</button>
+                <button className="button-trasparenteNero rounded-pill  fw-semibold "> Risorse </button>
               </div>
+              <Carousel />
               {/* fine bottoni */}
             </div>
           </div>
@@ -226,13 +224,13 @@ const RowCol1 = ({ profileSelect }) => {
           {/* fine terza sezione */}
 
           {/* inizio 4 sezione */}
-          <div className=" bg-white mt-2 rounded p-3">
+          <div className=" bg-white mt-2 rounded ">
             <div className={`${allExperience.length > 0 ? "" : "bordoTratteggiato rounded p-2"}`}>
-              <div className="d-flex align-items-center justify-content-between mb-3">
+              <div className="d-flex align-items-center justify-content-between mb-3 px-3">
                 <h2 className="fs-4 pt-3">Esperienza</h2>
 
                 {id === profileSelect?._id && (
-                  <div className="d-flex align-items-center gap3">
+                  <div className="d-flex align-items-center  gap3">
                     <div style={{ cursor: "pointer" }} className="toAdd rounded-circle p-2" onClick={callSetModalExperience}>
                       <PlusLg className="fs-3" />
                     </div>
@@ -246,7 +244,7 @@ const RowCol1 = ({ profileSelect }) => {
               </div>
 
               {allExperience.map((esperienza) => (
-                <div key={esperienza._id} style={{ borderBottom: "1px solid grey" }} className="d-flex align-items-top gap-2 mb-4">
+                <div key={esperienza._id} className=" experience d-flex align-items-top gap-2 mb-3 px-3">
                   <img className="me-2" style={{ width: "25px", height: "25px" }} src={esperienza?.image} alt="badge lavoro " />
                   <div className="d-flex flex-column ">
                     <h4 className="fw-semibold fs-5 m-0">{esperienza.role}</h4>

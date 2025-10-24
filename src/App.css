@@ -259,3 +259,32 @@ body {
 .textButtonPost:hover {
   color: black;
 }
+
+.experience:hover {
+  background-color: #ebebeb;
+}
+/* classi carousel */
+.classLink {
+  text-decoration: none;
+}
+.classLink:hover {
+  text-decoration: underline;
+}
+.toAddCarousel {
+  padding: 5px;
+  padding-inline: 7px;
+  border-radius: 50%;
+}
+.toAddCarousel:hover {
+  background: #c2c1c1;
+}
+.toCancelCarousel {
+  border-radius: 50%;
+}
+.toCancelCarousel:hover {
+  background: #c2c1c1;
+}
+
+.lineHeight {
+  line-height: 1.2;
+}
