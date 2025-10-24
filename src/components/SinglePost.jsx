@@ -110,9 +110,11 @@ const SinglePost = ({ post }) => {
           )}
         </Col>
       </Col>
-      {/* <div>
-        <p> Un’accoglienza speciale per un giorno indimenticabile </p>
-      </div> */}
+      {post.image && (
+        <div className="my-2">
+          <img src={post.image} alt="immagine del post" style={{ width: "100%", height: "450px", objectFit: "cover" }} />
+        </div>
+      )}
       <div className="mt-3">
         <p>{text}</p>
       </div>
