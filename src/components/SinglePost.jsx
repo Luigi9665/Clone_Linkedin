@@ -19,6 +19,7 @@ import ModalForPost from "./ModalForPost";
 import ModalDeletePost from "./ModalDeletePost";
 import { Link } from "react-router";
 import SectionComments from "./SectionComments";
+import CommentInput from "./CommentInput";
 
 const SinglePost = ({ post }) => {
   const [viewModal, setModal] = useState(false);
@@ -70,7 +71,7 @@ const SinglePost = ({ post }) => {
 
   useEffect(() => {
     addComment();
-  }, []);
+  }, [allComments]);
 
   return (
     <Row className="bg-white rounded-2 mt-3 p-3 ">
@@ -128,7 +129,8 @@ const SinglePost = ({ post }) => {
           <p className="text-secondary ">{repost} diffusioni di post</p>
         </div>
       </div>
-      {viewComments && <SectionComments comments={commentThisPost} />}
+      {viewComments && <SectionComments idPost={post._id} comments={commentThisPost} />}
+      {viewComments && <CommentInput idPost={post._id} methodSelect="POST" />}
       {/* button */}
       <div className="d-flex justify-content-around">
         <div style={{ cursor: "pointer" }} className="buttonPost textButtonPost rounded-3 py-2 mt-2">
