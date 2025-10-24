@@ -10,6 +10,28 @@ const FormPost = () => {
   const url = "https://striveschool-api.herokuapp.com/api/posts/";
   const key = import.meta.env.VITE_TOKEN_API;
   const dispatch = useDispatch();
+
+  //   const getImage = async (e) => {
+  //   const newUrl = ` https://striveschool-api.herokuapp.com/api/profile/${id}/picture`;
+  //   const fileInput = e.target.elements.imageProfile;
+  //   if (fileInput && fileInput.files.length > 0) {
+  //     const formDataImage = new FormData();
+  //     formDataImage.append("profile", fileInput.files[0]);
+
+  //     const uploadImage = await fetch(newUrl, {
+  //       method: "POST",
+  //       headers: {
+  //         Authorization: key,
+  //       },
+  //       body: formDataImage,
+  //     });
+
+  //     if (!uploadImage.ok) {
+  //       throw new Error("Errore durante il caricamento dell'immagine.");
+  //     }
+  //   }
+  // };
+
   const fetchPost = async () => {
     const sendToApi = {
       text: inputText,
