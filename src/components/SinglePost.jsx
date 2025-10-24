@@ -21,6 +21,7 @@ import { Link } from "react-router";
 
 const SinglePost = ({ post }) => {
   const [viewModal, setModal] = useState(false);
+  const [viewComments, setComments] = useState(false);
 
   const [viewDelete, setDelete] = useState(false);
 
@@ -44,6 +45,9 @@ const SinglePost = ({ post }) => {
 
   const setViewModal = () => {
     setModal(!viewModal);
+  };
+  const setViewComments = () => {
+    setComments(!viewComments);
   };
   const setViewDelete = () => {
     setDelete(!viewDelete);
@@ -111,25 +115,25 @@ const SinglePost = ({ post }) => {
       </div>
       {/* button */}
       <div className="d-flex justify-content-around">
-        <div>
-          <button className="mt-3 bg-white  d-flex align-items-center" style={{ border: "none" }}>
+        <div style={{ cursor: "pointer" }} className="buttonPost textButtonPost rounded-3 py-2 mt-2">
+          <button className=" d-flex align-items-center" style={{ color: "inherit", border: "none", background: "transparent" }}>
             <HandThumbsUp className="fs-4 me-2" />
-            <span className=" fw-semibold text-secondary"> Consiglia</span>
+            <span className=" fw-semibold "> Consiglia</span>
           </button>
         </div>
-        <div>
-          <button className="mt-3  bg-white  d-flex align-items-center" style={{ border: "none" }}>
-            <ChatText className="fs-4 me-2" /> <span className=" fw-semibold text-secondary"> Commenta</span>
+        <div style={{ cursor: "pointer" }} className="buttonPost textButtonPost rounded-3 py-2 mt-2" onClick={setViewComments}>
+          <button className="  d-flex align-items-center" style={{ color: "inherit", border: "none", background: "transparent" }}>
+            <ChatText className="fs-4 me-2" /> <span className=" fw-semibold "> Commenta</span>
           </button>
         </div>
-        <div>
-          <button className="mt-3  bg-white  d-flex align-items-center " style={{ border: "none" }}>
-            <ArrowRepeat className="fs-4 me-2" /> <span className=" fw-semibold text-secondary ">Diffondi il post</span>
+        <div style={{ cursor: "pointer" }} className="buttonPost textButtonPost rounded-3 py-2 mt-2">
+          <button className="  d-flex align-items-center " style={{ color: "inherit", border: "none", background: "transparent" }}>
+            <ArrowRepeat className="fs-4 me-2" /> <span className=" fw-semibold  ">Diffondi il post</span>
           </button>
         </div>
-        <div>
-          <button className="mt-3  bg-white  d-flex align-items-center " style={{ border: "none" }}>
-            <SendArrowUpFill className="fs-4 me-2" /> <span className=" fw-semibold text-secondary ">Invia</span>
+        <div style={{ cursor: "pointer" }} className="buttonPost textButtonPost rounded-3 py-2 mt-2">
+          <button className="  d-flex align-items-center " style={{ color: "inherit", border: "none", background: "transparent" }}>
+            <SendArrowUpFill className="fs-4 me-2" /> <span className=" fw-semibold  ">Invia</span>
           </button>
         </div>
       </div>

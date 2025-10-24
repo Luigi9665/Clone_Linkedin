@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostAction } from "../redux/action";
+import { getCommentsAction, getPostAction } from "../redux/action";
 import SinglePost from "./SinglePost";
 
 const ListPostHome = () => {
@@ -14,6 +14,7 @@ const ListPostHome = () => {
 
   useEffect(() => {
     dispatch(getPostAction());
+    dispatch(getCommentsAction());
   }, []);
 
   useEffect(() => {

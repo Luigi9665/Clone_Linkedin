@@ -243,3 +243,19 @@ body {
   text-decoration: underline;
   color: #0a58ca;
 }
+
+.buttonPost:hover {
+  background: #ededed;
+  scale: 1.15;
+}
+.buttonPost:active {
+  background: #ededed;
+  scale: 1;
+}
+
+.textButtonPost {
+  color: rgba(108, 117, 125, 1);
+}
+.textButtonPost:hover {
+  color: black;
+}
