@@ -259,3 +259,23 @@ body {
 .textButtonPost:hover {
   color: black;
 }
+
+.linkComment {
+  cursor: pointer;
+}
+
+.linkComment:hover {
+  text-decoration: underline;
+}
+
+.divComment {
+  margin-block: 12px;
+  padding: 10px;
+  border: 1px solid #f1eded;
+  border-radius: 10px;
+}
+.divComment p {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}

@@ -14,14 +14,16 @@ import {
 } from "react-bootstrap-icons";
 import { timeSince } from "../scriptDate/script";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalForPost from "./ModalForPost";
 import ModalDeletePost from "./ModalDeletePost";
 import { Link } from "react-router";
+import SectionComments from "./SectionComments";
 
 const SinglePost = ({ post }) => {
   const [viewModal, setModal] = useState(false);
   const [viewComments, setComments] = useState(false);
+  const [commentThisPost, setCommentPost] = useState([]);
 
   const [viewDelete, setDelete] = useState(false);
 
@@ -34,14 +36,20 @@ const SinglePost = ({ post }) => {
   };
   const profileSelect = useSelector((state) => state.profileSelect.content);
 
+  const allComments = useSelector((state) => state.comments.content);
+
   const image = post.user.image;
   const title = post.user.name + " " + post.user.surname;
   const username = post.user.username;
   const text = post.text;
   const dateToCreate = timeSince(post.createdAt);
-  const like = getRandomNumberOver();
-  const repost = getRandomNumberUnder();
+  const [like] = useState(getRandomNumberOver());
+  const [repost] = useState(getRandomNumberUnder());
   const hasMyPost = post.user._id === profileSelect?._id;
+
+  const addComment = () => {
+    setCommentPost(allComments.filter((comment) => comment.elementId === post._id));
+  };
 
   const setViewModal = () => {
     setModal(!viewModal);
@@ -59,6 +67,10 @@ const SinglePost = ({ post }) => {
   const hasModalDelete = () => {
     return <ModalDeletePost idPost={post._id} setViewModal={setViewDelete} />;
   };
+
+  useEffect(() => {
+    addComment();
+  }, []);
 
   return (
     <Row className="bg-white rounded-2 mt-3 p-3 ">
@@ -109,10 +121,14 @@ const SinglePost = ({ post }) => {
             <HandThumbsUpFill className="text-primary fs-6 me-2" /> {like}
           </p>
         </div>
+        <div style={{ userSelect: "none" }} className={`${commentThisPost.length > 0 ? "linkComment" : ""}`} onClick={setViewComments}>
+          <p className="text-secondary ">{commentThisPost.length} commenti</p>
+        </div>
         <div>
           <p className="text-secondary ">{repost} diffusioni di post</p>
         </div>
       </div>
+      {viewComments && <SectionComments comments={commentThisPost} />}
       {/* button */}
       <div className="d-flex justify-content-around">
         <div style={{ cursor: "pointer" }} className="buttonPost textButtonPost rounded-3 py-2 mt-2">

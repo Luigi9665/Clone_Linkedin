@@ -7,11 +7,16 @@ import Profile from "./Pages/Profile";
 import DetailsExperience from "./Pages/DetailsExperience";
 import { useEffect, useState } from "react";
 import Loader from "./components/Loader";
+import { useDispatch } from "react-redux";
+import { addAllProfileAction } from "./redux/action";
 
 function App() {
   const [viewLoader, setLoader] = useState(true);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(addAllProfileAction());
     setTimeout(() => {
       setLoader(false);
     }, 3000);

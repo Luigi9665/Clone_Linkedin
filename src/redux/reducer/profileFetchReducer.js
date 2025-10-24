@@ -1,9 +1,10 @@
-import { ADD_PROFILE, ADD_PROFILE_VISUAL, DELETE_ESPERIENZE, DELETE_PROFILE, GET_ESPERIENZE } from "../action";
+import { ADD_ALL_PROFILE, ADD_PROFILE, ADD_PROFILE_VISUAL, DELETE_ESPERIENZE, DELETE_PROFILE, GET_ESPERIENZE } from "../action";
 
 const initialState = {
   content: null,
   esperienze: [],
   profileToVisualize: null,
+  allProfile: [],
 };
 
 const profileFetchReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const profileFetchReducer = (state = initialState, action) => {
       return {
         ...state,
         profileToVisualize: action.payload,
+      };
+    case ADD_ALL_PROFILE:
+      return {
+        ...state,
+        allProfile: action.payload,
       };
     case GET_ESPERIENZE:
       return {

@@ -1,5 +1,6 @@
 export const ADD_PROFILE = "ADD_PROFILE";
 export const ADD_PROFILE_VISUAL = "ADD_PROFILE_VISUAL";
+export const ADD_ALL_PROFILE = "ADD_ALL_PROFILE";
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
 export const DELETE_ESPERIENZE = "DELETE_ESPERIENZE";
@@ -94,6 +95,35 @@ export const addProfileVisualAction = (indiceRicerca) => {
         const dataObj = await response.json();
         dispatch({ type: ADD_PROFILE_VISUAL, payload: dataObj });
         dispatch(getEsperienzeAction(dataObj._id));
+      } else if (response.status === 401 || response.status === 403) {
+        throw new Error("Autorizzazione fallita, controlla la tua API key.");
+      } else if (response.status === 404) {
+        throw new Error("Risorsa non trovata (404). Riprova con la ricerca.");
+      } else if (response.status >= 500) {
+        throw new Error("Errore del server, riprova più tardi.");
+      } else {
+        throw new Error("Errore nella richiesta: " + response.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+// FETCH ALL PROFILE
+export const addAllProfileAction = () => {
+  const url = `https://striveschool-api.herokuapp.com/api/profile/`;
+  return async (dispatch, getState) => {
+    console.log(getState);
+    try {
+      let response = await fetch(url, {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: key,
+        },
+      });
+      if (response.ok) {
+        const dataAllProfile = await response.json();
+        dispatch({ type: ADD_ALL_PROFILE, payload: dataAllProfile });
       } else if (response.status === 401 || response.status === 403) {
         throw new Error("Autorizzazione fallita, controlla la tua API key.");
       } else if (response.status === 404) {
